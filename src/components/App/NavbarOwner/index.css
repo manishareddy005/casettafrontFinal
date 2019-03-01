@@ -1,0 +1,17 @@
+.navBar{
+    font-size: 25px;
+    font-style: oblique;
+    font-weight: 120;
+    position: inherit;
+    white-space: pre-wrap;
+  }
+  .navBar {
+    padding: 20px;
+  }
+  .boldw{
+    font-weight: bold;
+  }
+  .btn-secondary {
+    background-color: rgba(0, 0, 0, 0) !important;
+    color: #fff !important;
+}

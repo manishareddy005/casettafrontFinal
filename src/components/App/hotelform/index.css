@@ -1,13 +1,14 @@
-.mydiv{
+.mydivhf{
    
     position:absolute;
-    top: 50%;
+    top: 45%;
     left: 50%;
     margin-top: -18%; /*set to a negative number 1/2 of your height*/
-    margin-left: -12.5%; /*set to a negative number 1/2 of your width*/
-    min-height:100vh;
-    max-height: auto;
-  
+    margin-left: -13%; /*set to a negative number 1/2 of your width*/
+    min-width:30%;
+    max-width:auto;
+    min-height:relative;
+    max-height:auto;
 
 }
 

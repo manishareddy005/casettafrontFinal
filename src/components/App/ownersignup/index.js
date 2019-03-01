@@ -61,7 +61,7 @@ class SignUpPage extends React.Component {
   render(){
     const { form } = this.state;
   return (
-    <div className="mydiv">
+    <div className="mydivs">
           <MDBCard>
           <form  onSubmit={this.submitHandler}>
             <MDBCardBody className="mx-4">

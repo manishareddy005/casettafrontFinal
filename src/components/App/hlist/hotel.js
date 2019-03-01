@@ -1,5 +1,5 @@
 import React from 'react';
-import himage from "/Users/manisha/Documents/casettafrontend/src/components/App/image/bg2.jpeg";
+import himage from "/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/bg1.jpeg";
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol,MDBRow } from 'mdbreact';
 import "./index.css";
 class Hotel extends React.Component{

@@ -1,9 +1,7 @@
 import React from "react";
 import {MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBBtn} from 'mdbreact';
 import "./index.css";
-
-class AddHotels extends React.Component {
-
+class ProfileOwner extends React.Component{
     constructor(props){
         super(props)
        this.onaddhotelsClick=this.onaddhotelsClick.bind(this)
@@ -15,13 +13,9 @@ class AddHotels extends React.Component {
 
     render(){
         return(
-     <MDBContainer className="mydiv">
-         <MDBRow>
-         <MDBCol md="6">
-         <MDBCard>
-            <MDBCardBody className="mx-4">
-            <div className="text-center mb-3">
-                <MDBBtn  href="/hotelform" 
+            <div>
+                <center>
+               <MDBBtn style={{width:"20em", margin:"6em"}} href="/hotelform" 
                   type="submit"
                   gradient="blue"
                   rounded
@@ -30,15 +24,9 @@ class AddHotels extends React.Component {
                 >
                   Add Hotels
                 </MDBBtn>
+                </center>
             </div>
-            </MDBCardBody>
-        </MDBCard>
-        </MDBCol>
-         </MDBRow>
-    </MDBContainer>
         )
     }
 }
-
-
-export default AddHotels;
+export default ProfileOwner;

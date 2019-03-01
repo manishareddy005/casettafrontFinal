@@ -17,6 +17,8 @@ import AddHotels from "./addhotels";
 import HotelForm from "./hotelform";
 import SearchBar from "./searchbar";
 import Home from "./home";
+import NavBarOwner from "./NavbarOwner";
+import ProfileOwner from "./profileowner";
 
 
 class App extends React.Component{
@@ -151,6 +153,18 @@ class App extends React.Component{
                         <div className="img">
                            <NavBar/>
                            <HotelForm/>
+                           </div>
+                           <FooterPage />
+                        </div>
+                     )
+
+               }}/>
+               <Route exact path="/profileowner" render={(props) => {
+                     return(
+                        <div className="homeb">
+                        <div className="img">
+                           <NavBarOwner/>
+                           <ProfileOwner/>
                            </div>
                            <FooterPage />
                         </div>

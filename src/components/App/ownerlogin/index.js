@@ -44,7 +44,7 @@ class LoginPage extends React.Component{
         .then(response=>{console.log(response.status)
             if(response.status==200)
             {
-                this.props.history.push(`/addhotels`)
+                this.props.history.push(`/profileowner`)
             }
         })
         .catch(() => console.log("Can’t access " + url + " response. "))
@@ -53,7 +53,7 @@ class LoginPage extends React.Component{
    render(){
     const { form } = this.state;
     return (
-      <div className="mydiv">
+      <div className="mydivl">
                 <MDBCard>
                 <form  onSubmit={this.submitHandler}>
             <MDBCardBody className="mx-4">

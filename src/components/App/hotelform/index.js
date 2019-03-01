@@ -60,7 +60,7 @@ class HotelForm extends React.Component {
         const { form } = this.state;
         return(
         <div > 
-                <MDBCard className="mydiv">
+                <MDBCard className="mydivhf">
                     <form onSubmit={this.submitHandler}>
                   <MDBCardBody className="mx-4">
                     <div className="text-center">

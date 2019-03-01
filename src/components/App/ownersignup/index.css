@@ -1,10 +1,10 @@
-.mydiv{
-        position:absolute;
-        top: 50%;
-        left: 50%;
-        margin-top: -18%; /*set to a negative number 1/2 of your height*/
-        margin-left: -12.5%; /*set to a negative number 1/2 of your width*/
-
+.mydivs{
+  position:absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -18%; /*set to a negative number 1/2 of your height*/
+  margin-left: -12.5%; /*set to a negative number 1/2 of your width*/
+  min-width:30%
       }
       .rgba-stylish-strong {
         background-color: white;
