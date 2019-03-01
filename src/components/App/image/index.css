@@ -1,0 +1,15 @@
+.homeb {
+    background-image: url("./bg1.jpeg");
+    background-repeat: no-repeat;
+    background-position: center center;  
+    background-size: cover;
+    -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+    position: relative;
+    min-height:100vh;
+    max-height: auto;
+    background-attachment: scroll;
+  }
+  

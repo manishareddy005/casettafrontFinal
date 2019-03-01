@@ -1,0 +1,16 @@
+.mydiv{
+   
+  position:absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -25%; /*set to a negative number 1/2 of your height*/
+  margin-left: -12.5%; /*set to a negative number 1/2 of your width*/
+  
+
+}
+.rgba-stylish-strong {
+  background-color: white;
+}
+.blue-gradient {
+  background: linear-gradient(40deg, #075b56, #839ba6) !important;
+}
