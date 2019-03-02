@@ -18,18 +18,25 @@ onViewClick(){
 render(){
         return(
             <div className="hstyle">
-            
+           
             <MDBCard style={{ width: "20em" ,height: "20em",background: "white",flex:1 }} >
-                <MDBCardImage className="img-fluid" src={himage} waves />
-                <MDBCardBody className="text-black">
+            <MDBCardBody className="text-black">
                 <MDBCardTitle><span>{this.props.name}</span><br></br></MDBCardTitle>
-                <MDBCardText className="text-black">
+                <MDBCardImage className="img-fluid" src={himage} waves />
+                <div className="row">
+                <div className="column" style={{marginLeft:"1em",marginTop:"1em"}}>
+                
                             <span>{this.props.location}</span><br></br>
                             <span>{this.props.price}</span><br></br>  
-                </MDBCardText>
+            
+                </div>
+                <div className="column" style={{marginLeft:"5em",marginTop:"0.5em"}}>
                 <MDBBtn onClick={this.onViewClick}>view</MDBBtn>
+                </div>
+                </div>
                 </MDBCardBody>
             </MDBCard>
+        
             
             </div>
         )

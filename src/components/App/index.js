@@ -130,7 +130,7 @@ class App extends React.Component{
                      return(
                         <div className="homeb">
                         <div className="img">
-                           <NavBar/>
+                           <NavBarOwner/>
                            <HotelForm/>
                            </div>
                            <FooterPage />

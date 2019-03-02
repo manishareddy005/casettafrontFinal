@@ -1,3 +1,7 @@
 .danger {
     background-color: red;
   }
+  .details{
+      display:block;
+      float:left;
+  }
