@@ -9,10 +9,8 @@ class Hotel extends React.Component{
        this.onViewClick=this.onViewClick.bind(this)
     }
 onViewClick(){
-    console.log(this.props.id)
+    console.log("Id of hotel is"+this.props.id)
     const ID = this.props.id
-   
-
     this.props.onViewClick(ID)
    
 }

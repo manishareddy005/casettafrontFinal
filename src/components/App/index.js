@@ -13,7 +13,6 @@ import {
    Switch,
    Redirect,
 } from 'react-router-dom';
-import AddHotels from "./addhotels";
 import HotelForm from "./hotelform";
 import SearchBar from "./searchbar";
 import Home from "./home";
@@ -51,6 +50,7 @@ class App extends React.Component{
                              this.setState ({
                              data : contents})
               })
+              .then(console.log("Fetched data:"+this.state.data))
          .catch(() => console.log("Can’t access " + url + " response. "))
         
      }
@@ -75,6 +75,7 @@ class App extends React.Component{
                   return(
                      <div className="homeb">
                       <div className="img">
+                      {console.log("home this.state.data:"+JSON.stringify(this.state.data))}
                            <NavBar/><br></br>
                            <HotelList 
                            hotel={this.state.data}
@@ -87,27 +88,15 @@ class App extends React.Component{
             
                <Route exact path="/viewhotel/:id"  render={(props) => {
                   const hid = props.match.params.id
-                  const hdata=this.state.data[hid-1]
-                  var arr = [];
-                  for (var key in hdata) {
-                     arr.push(hdata[key]);
+                  {
+                     console.log("hid:"+hid)
                   }
-                  console.log(arr)
-                  const newRecord = {
-                     name: arr[1],
-                     location: arr[2],
-                     price: arr[3]
-                  }
-            
                   return(
                      <div className="homeb">
                         <div className="img">
                            <NavBar/>
                            <ViewHotel
-                              name  = {newRecord.name} 
-                              location = {newRecord.location} 
-                              price  = {newRecord.price}
-                              history={props.history}
+                              id={hid}
                            />
                          </div>
                          <FooterPage/>
@@ -136,17 +125,7 @@ class App extends React.Component{
                      </div>
                   )
                }} />
-               <Route exact path="/addhotels" render={(props) => {
-                  return(
-                     <div className="homeb">
-                     <div className="img">
-                        <NavBar/>
-                        <AddHotels/>
-                        </div>
-                        <FooterPage />
-                     </div>
-                  )
-               }} />
+              
                   <Route exact path="/hotelform" render={(props) => {
                      return(
                         <div className="homeb">
