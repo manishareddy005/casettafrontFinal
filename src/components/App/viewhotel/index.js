@@ -1,7 +1,7 @@
 import React from "react";
 import './viewhotelcss.css';
 import styled from "styled-components";
-import himage from "/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/bg1.jpeg";
+import himage from "/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/bg2.jpeg";
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol,MDBRow } from 'mdbreact';
 const H = styled.div`
   padding: 4em;
@@ -46,6 +46,8 @@ class ViewHotel extends React.Component{
         .catch(() => console.log("Can’t access " + url + " response. "))
        
     }
+
+   
     render(){
         return (
         <div >

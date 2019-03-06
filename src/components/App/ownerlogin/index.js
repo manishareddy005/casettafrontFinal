@@ -9,7 +9,7 @@ class LoginPage extends React.Component{
             username:'',
             passwordHash:''
           }
-        };
+          };
         this.changeHandler = this.changeHandler.bind(this);
         this.submitHandler = this.submitHandler.bind(this);
     }
@@ -22,7 +22,7 @@ class LoginPage extends React.Component{
       }
     
       submitHandler(e) { 
-    
+     let res;
         const url = "http://localhost:9000/users/signin"; 
              let headers = new Headers();
          
@@ -35,21 +35,28 @@ class LoginPage extends React.Component{
              headers.append('GET', 'POST','PUT');
              
              e.preventDefault();
-             fetch(url, {
+                 fetch(url, {
                  headers: headers,
                  method: 'PUT',
                  body: JSON.stringify(this.state.form) 
              })
+        //.then(response=>{console.log(response.text())})
         .then(console.log(this.state.form))
-        .then(response=>{console.log(response.status)
+        
+         .then(response=>{console.log(response.status)
+          res = response.json()
+              .then((responseData)=>{localStorage.setItem('accessToken',responseData.accessToken)})
             if(response.status==200)
             {
-                this.props.history.push(`/profileowner`)
+              
+              this.props.history.push(`/profileowner`);
             }
-        })
-        .catch(() => console.log("Can’t access " + url + " response. "))
+            })
+           
+          .catch(() => console.log("Can’t access " + url + " response. "))
+          } 
         
-      }
+      
    render(){
     const { form } = this.state;
     return (

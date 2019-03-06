@@ -12,7 +12,8 @@ import {
   DropdownMenu,
   DropdownItem } from 'reactstrap';
   import "./index.css";
-  import Searchbar from "../searchbar";
+  import NavSearch from "../navsearch";
+  import logo from "/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/logo1.png"
   
 class NavBar extends React.Component {
   constructor(props) {
@@ -33,12 +34,12 @@ class NavBar extends React.Component {
       <div>
       
         <Navbar color="none" light expand="md">
-          <NavbarBrand href="/" className="text-black"><b>Casetta</b></NavbarBrand>
+          <NavbarBrand href="/"><b><img src = {require("/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/logo1.png")} width="120" height = "70" ></img></b></NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
             <NavItem>
-            <Searchbar/>
+            <NavSearch/>
             </NavItem>
               <NavItem>
                 <NavLink href="/login" className="text-black"><b>Owner Login</b></NavLink>

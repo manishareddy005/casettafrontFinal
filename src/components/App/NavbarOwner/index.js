@@ -24,16 +24,56 @@ import {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
+      userdata:{
+        username:'',
+        email:''
+      },
       isOpen: false,
       popoverOpen: false
     };
   }
+//   toggle() {
+//     this.setState({
+//       isOpen: !this.state.isOpen,
+//       popoverOpen: !this.state.popoverOpen,
+//       .then(responseJson => {
+//         this.setState ({
+//         userdata: responseJson})
+// })
+//     });
+//   }
+
   toggle() {
-    this.setState({
-      isOpen: !this.state.isOpen,
-      popoverOpen: !this.state.popoverOpen
-    });
+    var result;
+      var bearerToken = localStorage.getItem('accessToken');
+        const url = "http://localhost:9000/users/me";
+        var accesstoken = 'Bearer ' + bearerToken;
+
+        console.log(accesstoken);
+
+        fetch(url,{
+          method:'GET',
+          withCredentials:true,
+          credentials:'include',
+          headers:{
+            'Authorization':accesstoken,
+            'Content-Type': 'application/json',
+           'Access-Control-Allow-Origin': url
+          }
+        })
+        
+        .then((response)=>response.json())
+        .then(responseJson => {
+                            this.setState ({
+                                isOpen: !this.state.isOpen,
+                                popoverOpen: !this.state.popoverOpen,
+                                userdata: responseJson})
+             })
+       // .then((responseJson)=>{console.log(responseJson.username)})
+             
   }
+
+
   render() {
     return (
       <div>
@@ -47,11 +87,14 @@ import {
             <SearchBar/>
             </NavItem>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <NavItem id="Popover1">
-                <NavLink className="text-black"><img src={profileo} height="50%" width="50%"/></NavLink>
+                <NavLink className="text-black" onClick={this.onuserClick} ><img src={profileo} height="50%" width="50%"/></NavLink>
               </NavItem>
             <Popover placement="bottom" isOpen={this.state.popoverOpen} target="Popover1" toggle={this.toggle}>
           <PopoverHeader>Popover Title</PopoverHeader>
-          <PopoverBody>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</PopoverBody>
+          <PopoverBody>
+          <span className="details" >Username: &nbsp;&nbsp;&nbsp;&nbsp;{this.state.userdata.username}</span><br></br>
+          <span className="details" >Email: &nbsp;&nbsp;&nbsp;&nbsp;{this.state.userdata.email}</span><br></br>
+          </PopoverBody>
          </Popover>
             {/* <NavItem>
                 <NavLink href="/home" className="text-black"><img src={profileo} height="50%" width="50%"/></NavLink>
