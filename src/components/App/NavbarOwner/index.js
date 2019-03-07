@@ -84,13 +84,13 @@ import {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
             <NavItem>
-            <SearchBar/>
+            {/* <SearchBar/> */}
             </NavItem>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <NavItem id="Popover1">
                 <NavLink className="text-black" onClick={this.onuserClick} ><img src={profileo} height="50%" width="50%"/></NavLink>
               </NavItem>
             <Popover placement="bottom" isOpen={this.state.popoverOpen} target="Popover1" toggle={this.toggle}>
-          <PopoverHeader>Popover Title</PopoverHeader>
+          <PopoverHeader>Your Profile</PopoverHeader>
           <PopoverBody>
           <span className="details" >Username: &nbsp;&nbsp;&nbsp;&nbsp;{this.state.userdata.username}</span><br></br>
           <span className="details" >Email: &nbsp;&nbsp;&nbsp;&nbsp;{this.state.userdata.email}</span><br></br>

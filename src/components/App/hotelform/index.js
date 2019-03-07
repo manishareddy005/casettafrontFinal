@@ -28,8 +28,10 @@ class HotelForm extends React.Component {
       }
     
       submitHandler(e) { 
-    
+        var bearerToken = localStorage.getItem('accessToken');
         const url = "http://localhost:9000/hotels"; 
+        var accesstoken = 'Bearer ' + bearerToken;
+        console.log(accesstoken);
              let headers = new Headers();
          
              headers.append('Content-Type', 'application/json');
@@ -44,6 +46,13 @@ class HotelForm extends React.Component {
              fetch(url, {
                  headers: headers,
                  method: 'POST',
+                 withCredentials:true,
+                credentials:'include',
+                headers:{
+                  'Authorization':accesstoken,
+                  'Content-Type': 'application/json',
+                  'Access-Control-Allow-Origin': url
+                },
                  body: JSON.stringify(this.state.form) 
              })
         .then(console.log(this.state.form))

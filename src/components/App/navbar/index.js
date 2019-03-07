@@ -14,6 +14,7 @@ import {
   import "./index.css";
   import NavSearch from "../navsearch";
   import logo from "/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/logo1.png"
+import SearchBar from '../searchbar';
   
 class NavBar extends React.Component {
   constructor(props) {
@@ -39,7 +40,8 @@ class NavBar extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
             <NavItem>
-            <NavSearch/>
+            {/* <NavSearch/> */}
+            <SearchBar/>
             </NavItem>
               <NavItem>
                 <NavLink href="/login" className="text-black"><b>Owner Login</b></NavLink>
