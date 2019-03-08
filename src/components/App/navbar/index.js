@@ -41,7 +41,7 @@ class NavBar extends React.Component {
             <Nav className="ml-auto" navbar>
             <NavItem>
             {/* <NavSearch/> */}
-            <SearchBar/>
+            <SearchBar history={this.props.history}/>
             </NavItem>
               <NavItem>
                 <NavLink href="/login" className="text-black"><b>Owner Login</b></NavLink>

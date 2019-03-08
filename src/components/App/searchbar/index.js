@@ -89,7 +89,11 @@ export default class SearchBar extends React.Component {
                 })
                 .then(console.log("Fetched data:"+JSON.stringify(this.state.sdata)))
           .catch(() => console.log("Can’t access " + url + " response. "))
-      }                    
+
+
+
+      }    
+      // this.props.history.push(`/home`)                
     }
   render() {
     return (

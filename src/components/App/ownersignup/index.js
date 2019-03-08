@@ -1,7 +1,10 @@
 import React from "react";
 import "./index.css";
 import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBBtn, MDBIcon, MDBModalFooter } from 'mdbreact';
-
+import NavBar from "../navbar/index";
+import FooterPage from "../footer";
+import "../image/index.css";
+import "../index.css";
 class SignUpPage extends React.Component {
   constructor() {
     super();
@@ -61,52 +64,58 @@ class SignUpPage extends React.Component {
   render(){
     const { form } = this.state;
   return (
-    <div className="mydivs">
-          <MDBCard>
-          <form  onSubmit={this.submitHandler}>
-            <MDBCardBody className="mx-4">
-              <div className="text-center">
-                <h3 className="dark-grey-text mb-5">
-                  <strong>Sign Up</strong>
-                </h3>
-              </div>
-              <MDBInput
-                label="Your username"
-                group
-                name="username" type="text" value={form.username} onChange={this.changeHandler}
-              />
-              <MDBInput
-                label="Your email"
-                group
-                name="email" type="text" value={form.email} onChange={this.changeHandler}
-              />
-              <MDBInput
-                label="Your password"
-                group
-                name="passwordHash" type="password" value={form.passwordHash} onChange={this.changeHandler}
-              />
-              <div className="text-center mb-3">
-                <MDBBtn
-                  type="submit"
-                  gradient="blue"
-                  rounded
-                  className="btn-block z-depth-1a"
-                  name="submit" value="submit"
-                >
-                  Sign Up
-                </MDBBtn>
-             </div>
-            </MDBCardBody>
-            </form>
-            <MDBModalFooter className="mx-5 pt-3 mb-1">
-              <p className="font-small grey-text d-flex justify-content-end">
-                Have an account?
-                <a href="/login" className="blue-text ml-1">
-                 Login
-                </a>
-              </p>
-            </MDBModalFooter>
-          </MDBCard>
+    <div className="homeb">
+      <div className="img">
+          <NavBar/><br></br>
+          <div className="mydivs">
+                <MDBCard>
+                <form  onSubmit={this.submitHandler}>
+                  <MDBCardBody className="mx-4">
+                    <div className="text-center">
+                      <h3 className="dark-grey-text mb-5">
+                        <strong>Sign Up</strong>
+                      </h3>
+                    </div>
+                    <MDBInput
+                      label="Your username"
+                      group
+                      name="username" type="text" value={form.username} onChange={this.changeHandler}
+                    />
+                    <MDBInput
+                      label="Your email"
+                      group
+                      name="email" type="text" value={form.email} onChange={this.changeHandler}
+                    />
+                    <MDBInput
+                      label="Your password"
+                      group
+                      name="passwordHash" type="password" value={form.passwordHash} onChange={this.changeHandler}
+                    />
+                    <div className="text-center mb-3">
+                      <MDBBtn
+                        type="submit"
+                        gradient="blue"
+                        rounded
+                        className="btn-block z-depth-1a"
+                        name="submit" value="submit"
+                      >
+                        Sign Up
+                      </MDBBtn>
+                  </div>
+                  </MDBCardBody>
+                  </form>
+                  <MDBModalFooter className="mx-5 pt-3 mb-1">
+                    <p className="font-small grey-text d-flex justify-content-end">
+                      Have an account?
+                      <a href="/login" className="blue-text ml-1">
+                      Login
+                      </a>
+                    </p>
+                  </MDBModalFooter>
+                </MDBCard>
+          </div>
+        </div>
+      <FooterPage/>
     </div>
   );
   }

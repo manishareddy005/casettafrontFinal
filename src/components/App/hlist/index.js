@@ -13,7 +13,13 @@ class HotelList extends React.Component{
     }
     onViewClick(id){
         {console.log("hlist id"+id)}
-        this.props.history.push(`/viewhotel/${id}`)
+        let path=`/viewhotel/${id}`;
+        this.props.history.push({
+            pathname: path,
+            state: {
+               id:id
+            }
+           });
     }
     render(){
         return(
