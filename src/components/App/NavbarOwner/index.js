@@ -23,6 +23,7 @@ import {
     super(props);
 
     this.toggle = this.toggle.bind(this);
+    this.onSignOut = this.onSignOut.bind(this);
     this.state = {
       userdata:{
         username:'',
@@ -43,7 +44,7 @@ import {
 //     });
 //   }
 
-  toggle() {
+  componentDidMount() {
     var result;
       var bearerToken = localStorage.getItem('accessToken');
         const url = "http://localhost:9000/users/me";
@@ -65,12 +66,40 @@ import {
         .then((response)=>response.json())
         .then(responseJson => {
                             this.setState ({
-                                isOpen: !this.state.isOpen,
-                                popoverOpen: !this.state.popoverOpen,
-                                userdata: responseJson})
+                                userdata: responseJson
+                                })
              })
-       // .then((responseJson)=>{console.log(responseJson.username)})
-             
+       .then((responseJson)=>{console.log("usename navbarowner:" + this.state.userdata.username)})
+       //this.props.callbackFromParent(this.state.userdata.username);
+  }
+
+  toggle(){
+    this.setState ({
+      isOpen: !this.state.isOpen,
+      popoverOpen: !this.state.popoverOpen
+      })
+  }
+  onSignOut(e){
+    var bearerToken = localStorage.getItem('accessToken');
+        const url = "http://localhost:9000/users/signout";
+        var accesstoken = 'Bearer ' + bearerToken;
+
+        console.log(accesstoken);
+
+        fetch(url,{
+          method:'PUT',
+          withCredentials:true,
+          credentials:'include',
+          headers:{
+            'Authorization':accesstoken,
+            'Content-Type': 'application/json',
+           'Access-Control-Allow-Origin': url
+          }
+        })
+        
+        .then((response)=>response.json())
+        .then(localStorage.setItem('accessToken',null))
+
   }
 
 
@@ -100,7 +129,7 @@ import {
                 <NavLink href="/home" className="text-black"><img src={profileo} height="50%" width="50%"/></NavLink>
               </NavItem> */}
               <NavItem>
-                <NavLink href="/home" className="text-black"><img src={signout} height="50%" width="50%"/></NavLink>
+                <NavLink href="/home" className="text-black" on={this.onSignOut}><img src={signout} height="50%" width="50%"/></NavLink>
               </NavItem>
             </Nav>
           </Collapse>
