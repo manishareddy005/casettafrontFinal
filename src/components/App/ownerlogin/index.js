@@ -12,7 +12,8 @@ class LoginPage extends React.Component{
           form: {
             username:'',
             passwordHash:''
-          }
+          },
+          accessToken: ''
           };
         this.changeHandler = this.changeHandler.bind(this);
         this.submitHandler = this.submitHandler.bind(this);
@@ -49,13 +50,20 @@ class LoginPage extends React.Component{
         
          .then(response=>{console.log(response.status)
           res = response.json()
-              .then((responseData)=>{localStorage.setItem('accessToken',responseData.accessToken)})
+              .then((responseData)=>{localStorage.setItem('accessToken',responseData.accessToken)
+                                      this.setState(
+                                        {accessToken:responseData.accessToken}
+                                      )
+                                      console.log("bearerToken:"+this.state.accessToken)
+                                      //localStorage.setItem('accessToken',this.state.accessToken)
+            
             if(response.status==200)
             {
               
-              this.props.history.push(`/profileowner`);
+             this.props.history.push(`/profileowner`);
             }
             })
+          })
            
           .catch(() => console.log("Can’t access " + url + " response. "))
           } 

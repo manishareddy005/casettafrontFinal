@@ -47,6 +47,7 @@ import {
   componentDidMount() {
     var result;
       var bearerToken = localStorage.getItem('accessToken');
+      console.log("Bearer:"+bearerToken)
         const url = "http://localhost:9000/users/me";
         var accesstoken = 'Bearer ' + bearerToken;
 
@@ -63,12 +64,13 @@ import {
           }
         })
         
-        .then((response)=>response.json())
+        .then((response)=>{response.json()
         .then(responseJson => {
                             this.setState ({
                                 userdata: responseJson
                                 })
              })
+          })
        .then((responseJson)=>{console.log("usename navbarowner:" + this.state.userdata.username)})
        //this.props.callbackFromParent(this.state.userdata.username);
   }
@@ -108,7 +110,7 @@ import {
       <div>
       
         <Navbar color="none" light expand="md">
-          <NavbarBrand href="/" className="text-black"><b>Casetta</b></NavbarBrand>
+          <NavbarBrand href="/" className="text-black"><b><img src = {require("/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/logo.png")} width="200" height = "100" ></img></b></NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
