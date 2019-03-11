@@ -12,8 +12,8 @@ import {
   DropdownMenu,
   DropdownItem } from 'reactstrap';
   import "./index.css";
-  import NavSearch from "../navsearch";
-import SearchBar from '../searchbar';
+import Search from '../Prehome/search';
+import '../Prehome/search.css';
   
 class NavBar extends React.Component {
   constructor(props) {
@@ -40,7 +40,9 @@ class NavBar extends React.Component {
             <Nav className="ml-auto" navbar>
             <NavItem>
             {/* <NavSearch/> */}
-            <SearchBar history={this.props.history}/>
+            
+            <Search  history={this.props.history}/>
+          
             </NavItem>
               <NavItem>
                 <NavLink href="/login" className="text-black"><b>Owner Login</b></NavLink>

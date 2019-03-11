@@ -5,7 +5,7 @@ import ViewHotel from "./viewhotel/index";
 import SignUpPage from "./ownersignup";
 import LoginPage from "./ownerlogin";
 import HotelForm from "./hotelform";
-import Home from "./home";
+import PreHome from "./Prehome";
 import ProfileOwner from "./profileowner";
 import HomePage from "./HomePage";
 import {
@@ -14,6 +14,7 @@ import {
    Switch,
    Redirect,
 } from 'react-router-dom';
+
 class App extends React.Component{
    
    render(props){
@@ -21,7 +22,7 @@ class App extends React.Component{
          <Router>
             <Switch>
 
-            <Route exact path="/home1" component={Home}/>
+            <Route exact path="/prehome" component={PreHome}/>
                
                <Route exact path="/home" component={HomePage} />
             
@@ -31,7 +32,8 @@ class App extends React.Component{
               
                   <Route exact path="/hotelform" component={HotelForm} />
                <Route exact path="/profileowner" component={ProfileOwner}/>
-               <Redirect to="/home"/>
+
+               <Redirect to="/prehome"/>
             </Switch> 
          </Router>
       );

@@ -4,27 +4,77 @@ import HotelDisplay from "../hoteldisplay/index";
 import FooterPage from "../footer";
 import "../image/index.css";
 import "../index.css";
+import '../global.js';
 import {
    BrowserRouter as Router,
    Route,
    Switch,
    Redirect,
 } from 'react-router-dom';
+import HotelList from "../hlist";
 class HomePage extends React.Component{
    constructor(props){
       super(props);
+      this.state={
+         sdata:[]
+      }
     }
+
+    componentDidMount(){
+      let params={
+         "location":this.props.location.state.loc,
+         //"price":null
+       }
+       let url="";
+       console.log("search in home:"+this.props.location.state.loc)
+      let query=Object.keys(params).map(k=>encodeURIComponent(k)+'='+encodeURIComponent(params[k])).join('&');
+      console.log("query in home:"+query)
+      if((this.props.location.state.loc)==null){
+          url = "http://localhost:9000/hotels"; 
+      }
+      else{
+      url = "http://localhost:9000/hotels?"+query; }
+          let headers = new Headers();
+      
+          headers.append('Content-Type', 'application/json');
+          headers.append('Accept', 'application/json');
+      
+          headers.append('Access-Control-Allow-Origin', url);
+          headers.append('Access-Control-Allow-Credentials', 'true');
+      
+          headers.append('GET', 'POST');
+          
+      
+          fetch(url, {
+              headers: headers,
+              method: 'GET'
+          })
+          .then(response => response.json())
+          .then(contents => {console.log("in fetch: "+ JSON.stringify(contents));
+                              this.setState ({
+                              sdata : contents})          
+                })
+      }  
+
    render(){
+      if(global.search=="true")
+      {
+         console.log("search:"+global.search)
+      return(<div>Search=true</div>)
+      }
+      else{
       return(
                      <div className="homeb">
                       <div className="img">
-                           <NavBar/><br></br>
-                           <HotelDisplay history={this.props.history}/>
+                           <NavBar history={this.props.history}/><br></br>
+                           <HotelList 
+                              hotel={this.state.sdata}
+                              history={this.props.history}/>
                         </div>
                         <FooterPage/>
                      </div>
                   )
-   }
+   }}
 }
 
 
