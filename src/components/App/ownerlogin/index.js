@@ -59,7 +59,6 @@ class LoginPage extends React.Component{
             
             if(response.status==200)
             {
-              
              this.props.history.push(`/profileowner`);
             }
             })
