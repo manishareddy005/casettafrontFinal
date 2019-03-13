@@ -42,7 +42,7 @@ class Search extends React.Component{
             <div class="container"> 
                     <Row >
                       <div class="input-group">
-                      <input type="text" class="form-control" placeholder="Search the hotel by location"  style={{height:'100%'}} onChange={this.handleChange}/>
+                      <input type="text" class="form-control" placeholder="Search the hotel by location or name"  style={{height:'100%'}} onChange={this.handleChange}/>
                       <div class="input-group-append">
                         <button class="btn btn-secondary" type="button" onClick={this.onButtonClick}>
                           <i class="fa fa-search"></i>

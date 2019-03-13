@@ -10,8 +10,8 @@ import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, 
 const H = styled.div`
   padding: 4em;
   background: white;
-  width: 50%;
-`;
+  width: 50%;`;
+
 
 class ViewHotel extends React.Component{
 
@@ -42,17 +42,19 @@ class ViewHotel extends React.Component{
             method: 'GET'
         })
         .then(response => response.json())
-        .then(contents => {console.log("in fetch: "+ contents);
-                            this.setState ({
-                            hoteldata : contents})
-             })
-             .then(console.log("Fetched data:"+JSON.stringify(this.state.hoteldata)))
-        .catch(() => console.log("Can’t access " + url + " response. "))
+          .then(contents => {console.log("in fetch: "+ JSON.stringify(contents));
+                              this.setState ({
+                              hoteldata : contents})          
+                })
+        //.catch(() => console.log("Can’t access " + url + " response. "))
        
     }
 
    
     render(){
+        // let imgurl1=this.state.hoteldata.imageUrls[0];
+        // let imgurl2=this.state.hoteldata.imageUrls[1];
+        // let imgurl3=this.state.hoteldata.imageUrls[2];
         return (
             <div className="homeb">
                       <div className="img">
@@ -64,13 +66,18 @@ class ViewHotel extends React.Component{
                                 <MDBCardBody className="text-black">
                                     <MDBCardTitle><span>{this.state.hoteldata.name}</span><br></br></MDBCardTitle>
                                     <MDBCardImage className="img-fluid" src={himage} waves />
+                                    {/* <MDBCardImage className="img-fluid" src={imgurl1} waves />
+                                    <MDBCardImage className="img-fluid" src={imgurl2} waves />
+                                    <MDBCardImage className="img-fluid" src={imgurl3} waves /> */}
                                     <div style={{marginTop:"2em"}}>
                                     <h5>
                                             <span className="details" >Location&nbsp;&nbsp;:&nbsp;&nbsp;{this.state.hoteldata.location}</span><br></br>
                                             <span className="details" >Price&nbsp;&nbsp;:&nbsp;&nbsp;{this.state.hoteldata.price}</span><br></br>  
-                                            <span className="details" >Rating&nbsp;&nbsp;:&nbsp;&nbsp;{this.state.hoteldata.rating}</span><br></br>  
+                                            <span className="details" >Ranking&nbsp;&nbsp;:&nbsp;&nbsp;{this.state.hoteldata.rating}</span><br></br>  
                                             <span className="details" >Description&nbsp;&nbsp;:&nbsp;&nbsp;{this.state.hoteldata.description}</span><br></br> 
-                                        <span className="details" >URL&nbsp;&nbsp;:&nbsp;&nbsp;{this.state.hoteldata.url}</span><br></br>   
+                                            <span className="details" >Amenities&nbsp;&nbsp;:&nbsp;&nbsp;{this.state.hoteldata.amenities}</span><br></br> 
+                                            <span className="details" >URL&nbsp;&nbsp;:&nbsp;&nbsp;{this.state.hoteldata.url}</span><br></br>   
+                                        {/* <span className="details" >imgURL&nbsp;&nbsp;:&nbsp;&nbsp;{this.state.hoteldata.imageUrls}</span><br></br> */}
                                     </h5>
                                     </div>
                                     </MDBCardBody>

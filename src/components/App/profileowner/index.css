@@ -13,3 +13,18 @@
 .rgba-stylish-strong {
     background-color: white;
 }
+
+.hliststyle{
+    padding:5vh;
+    position:relative;
+    display: flex;
+   flex-wrap: wrap;
+   
+
+}
+.hstyle{
+   padding:0.5vh;
+   padding-left: 3vh;
+   padding-bottom: 3vh;
+  
+}

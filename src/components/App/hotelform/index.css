@@ -1,16 +1,36 @@
 .mydivhf{
    
-    position:absolute;
-    top: 45%;
+    position: relative;;
+    /* top: 45%;
     left: 50%;
-    margin-top: -18%; /*set to a negative number 1/2 of your height*/
-    margin-left: -13%; /*set to a negative number 1/2 of your width*/
+    margin-top: -18%; 
+    margin-left: -13%;
     min-width:30%;
-    max-width:auto;
-    min-height:relative;
-    max-height:auto;
+    max-width:auto; 
+   /* min-height:relative;
+    max-height:auto; */
+    margin-left: 25%;
+    margin-right:25%;
 
 }
+.imgform{
+    min-height:100vh;
+    max-height: auto;
+}
+.hotelformb {
+    background-image: url("../image/bg1.jpeg");
+    background-repeat: no-repeat;
+    background-position: center center;  
+    background-size: cover;
+    -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+    position: relative;
+    min-height:100vh;
+    max-height: auto;
+    background-attachment: scroll;
+  }
 
 /* .pink-textarea textarea.md-textarea:focus:not([readonly]) {
     border-bottom: 1px solid #f48fb1;

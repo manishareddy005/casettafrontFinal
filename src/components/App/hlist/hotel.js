@@ -1,5 +1,5 @@
 import React from 'react';
-import himage from "/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/bg1.jpeg";
+import himage from "/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/6.png";
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol,MDBRow } from 'mdbreact';
 import "./index.css";
 class Hotel extends React.Component{
@@ -37,18 +37,24 @@ onViewClick(event){
 }
 
 render(){
+    let imgurl;
+    if(this.props.imageUrls==null)
+    { imgurl=himage}
+    else
+    imgurl=this.props.imageUrls[0];
         return(
             <div className="hstyle">
            
             <MDBCard style={{ width: "20em" ,height: "20em",background: "white",flex:1 }} >
             <MDBCardBody className="text-black">
                 <MDBCardTitle><span>{this.props.name}</span><br></br></MDBCardTitle>
-                <MDBCardImage className="img-fluid" src={himage} width="100%" height="50%" waves />
+                <MDBCardImage className="img-fluid" src={imgurl} width="100%" height="50%" waves />
                 <div className="row">
                 <div className="column" style={{marginLeft:"1em",marginTop:"1em"}}>
                 
                             <span>{this.props.location}</span><br></br>
-                            <span>{this.props.price}</span><br></br>  
+                            <span>Rs.{this.props.price}</span><br></br> 
+                           {/* <span>{this.props.imageUrls}</span><br></br>     */}
             
                 </div>
                 <div className="column" style={{marginLeft:"5em",marginTop:"0.5em"}}>

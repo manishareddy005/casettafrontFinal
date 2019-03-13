@@ -14,7 +14,6 @@ import {
 
   import { Button, Popover, PopoverHeader, PopoverBody } from 'reactstrap';
   import "./index.css";
-  import SearchBar from "../searchbar";
  import signout from "/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/logout.png";
  import profileo from "/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/profile.png";
 
@@ -29,6 +28,7 @@ import {
         username:'',
         email:''
       },
+      
       isOpen: false,
       popoverOpen: false
     };
@@ -109,7 +109,7 @@ import {
       <div>
       
         <Navbar color="none" light expand="md">
-          <NavbarBrand href="/" className="text-black"><b><img src = {require("/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/logo.png")} width="200" height = "100" ></img></b></NavbarBrand>
+          <NavbarBrand href="/" className="text-black"><b><img src = {require("/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/logo1.png")} width="200" height = "100" ></img></b></NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>

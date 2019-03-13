@@ -34,22 +34,19 @@ class NavBar extends React.Component {
       <div>
       
         <Navbar color="none" light expand="md">
-          <NavbarBrand href="/"><b><img src = {require("/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/logo.png")} width="150" height = "80" ></img></b></NavbarBrand>
+          <NavbarBrand href="/"><b><img src = {require("/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/logo1.png")} width="150" height = "80" ></img></b></NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
             <NavItem>
-            {/* <NavSearch/> */}
-            
             <Search  history={this.props.history}/>
-          
             </NavItem>
               <NavItem>
-                <NavLink href="/login" className="text-black"><b>Owner Login</b></NavLink>
+                <NavLink href="/login" className="text-black"><b>Owner</b></NavLink>
               </NavItem>
-              <NavItem>
+              {/* <NavItem>
                 <NavLink href="https://github.com/reactstrap/reactstrap" className="text-black"><b>GitHub</b></NavLink>
-              </NavItem>
+              </NavItem> */}
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret className="text-black">
                 <b>Price</b>

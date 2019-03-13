@@ -22,7 +22,7 @@ class App extends React.Component{
          <Router>
             <Switch>
 
-            <Route exact path="/prehome" component={PreHome}/>
+            <Route  path="/prehome" component={PreHome}/>
                
                <Route exact path="/home" component={HomePage} />
             
