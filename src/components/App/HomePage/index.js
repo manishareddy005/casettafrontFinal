@@ -21,19 +21,40 @@ class HomePage extends React.Component{
     }
 
     componentDidMount(){
-      let params={
-         "location":this.props.location.state.loc,
-         //"price":null
-       }
+      let params
+       if((this.props.location.state.loc!=null)&&(this.props.location.state.price!=null))
+       {
+         params={
+            "location":this.props.location.state.loc,
+            "maxP":this.props.location.state.price
+         }
+      }
+      else if((this.props.location.state.loc==null)&&(this.props.location.state.price!=null))
+      {
+         params={
+            "maxP":this.props.location.state.price
+         }
+      }
+      else if((this.props.location.state.loc!=null)&&(this.props.location.state.price==null))
+      {
+         params={
+            "location":this.props.location.state.loc
+         }
+      }
+      else{
+        params={
+        }
+      }
        let url="";
        console.log("search in home:"+this.props.location.state.loc)
       let query=Object.keys(params).map(k=>encodeURIComponent(k)+'='+encodeURIComponent(params[k])).join('&');
       console.log("query in home:"+query)
-      if((this.props.location.state.loc)==null){
+      if(params==null){
           url = "http://localhost:9000/hotels"; 
       }
       else{
-      url = "http://localhost:9000/hotels?"+query; }
+            url = "http://localhost:9000/hotels?"+query; 
+          }
           let headers = new Headers();
       
           headers.append('Content-Type', 'application/json');

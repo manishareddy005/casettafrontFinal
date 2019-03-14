@@ -11,17 +11,20 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem } from 'reactstrap';
+  import {  MDBRangeInput, MDBBtn } from "mdbreact";
   import "./index.css";
 import Search from '../Prehome/search';
 import '../Prehome/search.css';
-  
+import Filters from "./filters"
 class NavBar extends React.Component {
   constructor(props) {
     super(props);
 
     this.toggle = this.toggle.bind(this);
+    this.handlePricingChange = this.handlePricingChange.bind(this);
     this.state = {
-      isOpen: false
+      isOpen: false,
+      pricevalue: 0
     };
   }
   toggle() {
@@ -29,7 +32,13 @@ class NavBar extends React.Component {
       isOpen: !this.state.isOpen
     });
   }
+
+  handlePricingChange = value => {
+    this.setState({ value });
+  };
+
   render() {
+    let price;
     return (
       <div>
       
@@ -39,7 +48,8 @@ class NavBar extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
             <NavItem>
-            <Search  history={this.props.history}/>
+            {/* <Search  history={this.props.history}/> */}
+            <Filters history={this.props.history}/>
             </NavItem>
               <NavItem>
                 <NavLink href="/login" className="text-black"><b>Owner</b></NavLink>
@@ -47,7 +57,7 @@ class NavBar extends React.Component {
               {/* <NavItem>
                 <NavLink href="https://github.com/reactstrap/reactstrap" className="text-black"><b>GitHub</b></NavLink>
               </NavItem> */}
-              <UncontrolledDropdown nav inNavbar>
+              {/* <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret className="text-black">
                 <b>Price</b>
                 </DropdownToggle>
@@ -63,7 +73,8 @@ class NavBar extends React.Component {
                     Reset
                   </DropdownItem>
                 </DropdownMenu>
-              </UncontrolledDropdown>
+              </UncontrolledDropdown> */}
+              
             </Nav>
           </Collapse>
         </Navbar>

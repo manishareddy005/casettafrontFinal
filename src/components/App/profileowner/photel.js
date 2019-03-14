@@ -56,7 +56,7 @@ render(){
             <MDBCard style={{ width: "20em" ,height: "25em",background: "white",flex:1 }} >
             <MDBCardBody className="text-black">
                 <MDBCardTitle><span>{this.props.name}</span><br></br></MDBCardTitle>
-                <MDBCardImage className="img-fluid" src={imgurl} width="100%" height="50%" waves />
+                <MDBCardImage className="imgcard" src={imgurl} width="100%" height="50%" waves />
                 <div className="row">
                 <div className="column" style={{marginLeft:"1em",marginTop:"1em"}}>
                 

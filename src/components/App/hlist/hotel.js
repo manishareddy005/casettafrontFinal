@@ -55,7 +55,6 @@ render(){
                             <span>{this.props.location}</span><br></br>
                             <span>Rs.{this.props.price}</span><br></br> 
                            {/* <span>{this.props.imageUrls}</span><br></br>     */}
-            
                 </div>
                 <div className="column" style={{marginLeft:"5em",marginTop:"0.5em"}}>
                 <MDBBtn onClick={this.onViewClick} >view</MDBBtn>

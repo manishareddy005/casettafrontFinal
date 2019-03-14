@@ -14,6 +14,7 @@ import {
    Switch,
    Redirect,
 } from 'react-router-dom';
+import ImageUpload from "./hotelform/imgupload";
 // import Header from "./header";
 // import LeafletMap from "./map";
 
@@ -36,6 +37,7 @@ class App extends React.Component{
                <Route exact path="/profileowner" component={ProfileOwner}/>
                {/* <Route exact path="/header" component={Header}/>
                <Route exact path="/map" component={LeafletMap}/> */}
+               <Route exact path="/imageupload" component={ImageUpload}/>
 
 
                <Redirect to="/prehome"/>

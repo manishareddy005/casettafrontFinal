@@ -47,7 +47,7 @@ class LoginPage extends React.Component{
           console.log("Form username"+this.state.form.username);
           console.log("Form password"+this.state.form.passwordHash);
 
-              const url = "http://localhost:9000/users/signin"; 
+            const url = "http://localhost:9000/users/signin"; 
              let headers = new Headers();
          
              headers.append('Content-Type', 'application/json');

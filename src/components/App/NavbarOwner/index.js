@@ -16,6 +16,7 @@ import {
   import "./index.css";
  import signout from "/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/logout.png";
  import profileo from "/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/profile.png";
+ import '../Prehome/search.css';
 
  class NavBarOwner extends React.Component {
   constructor(props) {
@@ -109,12 +110,12 @@ import {
       <div>
       
         <Navbar color="none" light expand="md">
-          <NavbarBrand href="/" className="text-black"><b><img src = {require("/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/logo1.png")} width="200" height = "100" ></img></b></NavbarBrand>
+          <NavbarBrand className="text-black"><b><img src = {require("/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/logo1.png")} width="200" height = "100" ></img></b></NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
             <NavItem>
-            {/* <SearchBar/> */}
+            {/* <Search  history={this.props.history}/> */}
             </NavItem>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <NavItem id="Popover1">
                 <NavLink className="text-black" onClick={this.onuserClick} ><img src={profileo} height="50%" width="50%"/></NavLink>
