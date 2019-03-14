@@ -2,11 +2,12 @@ import React from 'react';
 import himage from "/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/6.png";
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol,MDBRow } from 'mdbreact';
 import "./index.css";
-class Hotel extends React.Component{
+class PHotel extends React.Component{
 
     constructor(props){
         super(props)
        this.onViewClick=this.onViewClick.bind(this)
+       this.onEditClick=this.onEditClick.bind(this)
        this.state={
            id:""
        }
@@ -35,6 +36,13 @@ onViewClick(event){
     this.props.onViewClick(ID)
     
 }
+onEditClick(event){
+    
+    console.log("Id of hotel is"+this.props.id)
+    const ID = this.props.id
+    this.props.onEditClick(ID)
+    
+}
 
 render(){
     let imgurl;
@@ -45,10 +53,10 @@ render(){
         return(
             <div className="hstyle">
            
-            <MDBCard style={{ width: "20em" ,height: "20em",background: "white",flex:1 }} >
+            <MDBCard style={{ width: "20em" ,height: "25em",background: "white",flex:1 }} >
             <MDBCardBody className="text-black">
                 <MDBCardTitle><span>{this.props.name}</span><br></br></MDBCardTitle>
-                <MDBCardImage className="imgcard" src={imgurl} width="100%" height="50%" waves />
+                <MDBCardImage className="img-fluid" src={imgurl} width="100%" height="50%" waves />
                 <div className="row">
                 <div className="column" style={{marginLeft:"1em",marginTop:"1em"}}>
                 
@@ -57,8 +65,9 @@ render(){
                            {/* <span>{this.props.imageUrls}</span><br></br>     */}
             
                 </div>
-                <div className="column" style={{marginLeft:"5em",marginTop:"0.5em"}}>
-                <MDBBtn onClick={this.onViewClick} >view</MDBBtn>
+                <div className="column" style={{marginLeft:"2em",marginTop:"0.5em"}}>
+                <MDBBtn onClick={this.onViewClick} >view</MDBBtn>&nbsp;&nbsp;&nbsp;&nbsp;
+                <MDBBtn onClick={this.onEditClick} >Edit</MDBBtn>
                 </div>
                 </div>
                 </MDBCardBody>
@@ -70,4 +79,4 @@ render(){
     }   
 }
 
-export default Hotel;
+export default PHotel;

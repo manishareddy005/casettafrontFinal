@@ -23,48 +23,7 @@ class SignUpPage extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.submitownerRegistrationForm = this.submitownerRegistrationForm.bind(this);
   }
-  // changeHandler(e) {
-  //   e.persist();
-  //   let store = this.state;
-  //   store.form[e.target.name] = e.target.value;
-  //   this.setState(store);
-  // }
-
-  // submitHandler(e) { 
-
-  //   const url = "http://localhost:9000/users"; 
-  //        let headers = new Headers();
-     
-  //        headers.append('Content-Type', 'application/json');
-  //        headers.append('Accept', 'application/json');
-     
-  //        headers.append('Access-Control-Allow-Origin', url);
-  //        headers.append('Access-Control-Allow-Credentials', 'true');
-     
-  //        headers.append('GET', 'POST');
-         
-  //        e.preventDefault();
-  //        fetch(url, {
-  //            headers: headers,
-  //            method: 'POST',
-  //            body: JSON.stringify(this.state.form) 
-  //        })
-  //   .then(console.log(this.state.form))
-  //   .then(response=>{console.log(response.stringify)
-  //   if(response.status==200)
-  //   {
-
-  //     this.props.history.push(`/login`)
-  //   }
-  //   else
-  //   {
-  //     alert("User error");
-  //   }
-  //   })
-  //   .then(contents => {console.log("in signup fetch: "+ contents);})
-  //   .catch(() => console.log("Can’t access " + url + " response. "))
-   
-  // }
+  
   handleChange(e) {
     let fields = this.state.fields;
     fields[e.target.name] = e.target.value;

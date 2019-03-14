@@ -52,7 +52,8 @@ class HomePage extends React.Component{
           .then(response => response.json())
           .then(contents => {console.log("in fetch: "+ JSON.stringify(contents));
                               this.setState ({
-                              sdata : contents})          
+                              sdata : contents})    
+                              
                 })
       }  
 

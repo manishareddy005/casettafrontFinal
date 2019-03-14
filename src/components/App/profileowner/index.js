@@ -6,6 +6,7 @@ import {MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBBtn} from 'mdbrea
 import "./index.css";
 import NavBarOwner from "../NavbarOwner";
 import HotelList from "../hlist/index"
+import PHotelList from "./phlist";
 class ProfileOwner extends React.Component{
     constructor(props){
         super(props)
@@ -107,7 +108,10 @@ class ProfileOwner extends React.Component{
                         </MDBBtn>
                         </center>
                         </div>
-                    <HotelList 
+                    {/* <HotelList 
+                         hotel={this.state.ohdata}
+                        history={this.props.history}/> */}
+                        <PHotelList 
                          hotel={this.state.ohdata}
                         history={this.props.history}/>
                 </div>

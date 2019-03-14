@@ -33,9 +33,8 @@ class HotelForm extends React.Component {
           this.setState({
             fields
           });
-      
       }
-      
+
      submitHotelForm(e) {
           let res;
           e.preventDefault();
