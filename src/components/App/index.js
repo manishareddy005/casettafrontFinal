@@ -43,7 +43,7 @@ class App extends React.Component{
                <Redirect to="/prehome"/>
             </Switch> 
          </Router>
-      );
+      );                                
    }
 }
 export default App;
