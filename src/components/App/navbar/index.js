@@ -22,6 +22,7 @@ class NavBar extends React.Component {
 
     this.toggle = this.toggle.bind(this);
     this.handlePricingChange = this.handlePricingChange.bind(this);
+    this.onOwnerLogged = this.onOwnerLogged.bind(this);
     this.state = {
       isOpen: false,
       pricevalue: 0
@@ -37,6 +38,22 @@ class NavBar extends React.Component {
     this.setState({ value });
   };
 
+  onOwnerLogged() {
+    if(this.props.oname == null) {
+      return (
+        <NavItem>
+        <NavLink href="/login" className="text-black"><b>Owner</b></NavLink>
+      </NavItem>
+      );
+    } else {
+      return (
+        <div className="row">
+        <NavLink href="/profileowner" className="text-black"><b>My Profile</b></NavLink>
+      </div>
+      );
+    }
+  }
+
   render() {
     let price;
     return (
@@ -48,12 +65,12 @@ class NavBar extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
             <NavItem>
-            {/* <Search  history={this.props.history}/> */}
             <Filters history={this.props.history}/>
-            </NavItem>
-              <NavItem>
+            </NavItem>&nbsp;&nbsp;&nbsp;&nbsp;
+            {this.onOwnerLogged()}
+              {/* <NavItem>
                 <NavLink href="/login" className="text-black"><b>Owner</b></NavLink>
-              </NavItem>
+              </NavItem> */}
               {/* <NavItem>
                 <NavLink href="https://github.com/reactstrap/reactstrap" className="text-black"><b>GitHub</b></NavLink>
               </NavItem> */}

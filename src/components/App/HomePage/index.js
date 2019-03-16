@@ -15,6 +15,7 @@ import HotelList from "../hlist";
 class HomePage extends React.Component{
    constructor(props){
       super(props);
+      this.onOwnerLogged=this.onOwnerLogged.bind(this);
       this.state={
          sdata:[]
       }
@@ -76,8 +77,17 @@ class HomePage extends React.Component{
                               sdata : contents})    
                               
                 })
-      }  
-
+      } 
+      onOwnerLogged() {
+         if(this.props.location.state.name != null) 
+         {
+           return (
+             <div>
+             <center><h2>Welcome back&nbsp;{this.props.location.state.name}...</h2></center>
+           </div>
+           );
+         }
+       } 
    render(){
       if(global.search=="true")
       {
@@ -88,7 +98,8 @@ class HomePage extends React.Component{
       return(
                      <div className="homeb">
                       <div className="img">
-                           <NavBar history={this.props.history}/><br></br>
+                           <NavBar history={this.props.history} oname={this.props.location.state.name}/><br></br>
+                           {this.onOwnerLogged()}
                            <HotelList 
                               hotel={this.state.sdata}
                               history={this.props.history}/>

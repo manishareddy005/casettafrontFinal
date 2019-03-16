@@ -78,8 +78,16 @@ class LoginPage extends React.Component{
                                       console.log("bearerToken:"+this.state.accessToken)
                                       //localStorage.setItem('accessToken',this.state.accessToken)
     
-              this.props.history.push(`/profileowner`);
-                      })
+              //this.props.history.push(`/profileowner`);
+                let path=`home`;
+                this.props.history.push({
+                  pathname: path,
+                  state: {
+                  name:this.state.form.username
+                  }
+                });  
+             
+              })
             }
             else 
             {
