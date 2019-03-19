@@ -83,9 +83,17 @@ class HomePage extends React.Component{
          {
            return (
              <div>
+            <NavBar history={this.props.history} oname={this.props.location.state.name}/><br></br>
              <center><h2>Welcome back&nbsp;{this.props.location.state.name}...</h2></center>
            </div>
            );
+         }
+         else{
+            return(
+               <div>
+            <NavBar history={this.props.history}/><br></br>
+            </div>
+            );
          }
        } 
    render(){
@@ -98,7 +106,7 @@ class HomePage extends React.Component{
       return(
                      <div className="homeb">
                       <div className="img">
-                           <NavBar history={this.props.history} oname={this.props.location.state.name}/><br></br>
+                           {/* <NavBar history={this.props.history} oname={this.props.location.state.name}/><br></br> */}
                            {this.onOwnerLogged()}
                            <HotelList 
                               hotel={this.state.sdata}

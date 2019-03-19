@@ -5,10 +5,13 @@
   margin-top: -18%; /*set to a negative number 1/2 of your height*/
   margin-left: -12.5%; /*set to a negative number 1/2 of your width*/
   min-width:30%
-      }
-      .rgba-stylish-strong {
-        background-color: white;
-      }
-      .blue-gradient {
-        background: linear-gradient(40deg, #075b56, #839ba6) !important;
-      }
+}
+.rgba-stylish-strong {
+  background-color: white;
+}
+.blue-gradient {
+  background: linear-gradient(40deg, #075b56, #839ba6) !important;
+}
+.errorMsg{
+  color: blue;
+}

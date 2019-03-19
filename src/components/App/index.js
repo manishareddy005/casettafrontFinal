@@ -15,6 +15,9 @@ import {
    Redirect,
 } from 'react-router-dom';
 import ImageUpload from "./hotelform/imgupload";
+import Map from "./mapbox/App";
+import SimpleMap from "./maps";
+import UpdateHotel from "./hotelform/updatehotel";
 // import Header from "./header";
 // import LeafletMap from "./map";
 
@@ -38,6 +41,11 @@ class App extends React.Component{
                {/* <Route exact path="/header" component={Header}/>
                <Route exact path="/map" component={LeafletMap}/> */}
                <Route exact path="/imageupload" component={ImageUpload}/>
+               <Route exact path="/updatehotel" component={UpdateHotel}/>
+
+
+               <Route exact path="/maps" component={Map}/>
+               <Route exact path="/trialmap" component={SimpleMap}/>
 
 
                <Redirect to="/prehome"/>

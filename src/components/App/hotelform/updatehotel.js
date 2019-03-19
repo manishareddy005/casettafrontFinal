@@ -5,7 +5,7 @@ import FooterPage from "../footer/index";
 import "../image/index.css";
 import "../index.css";
 import NavBarOwner from "../NavbarOwner/index";
-class HotelForm extends React.Component {
+class UpdateHotel extends React.Component {
 
 constructor() {
     super();
@@ -25,11 +25,66 @@ constructor() {
       file: '',
       imagePreviewUrl: '',
       result:'',
-      img:[]
+      img:[],
+      hoteldata:[],
     };
     this.handleChange = this.handleChange.bind(this);
     this.submitHotelForm = this.submitHotelForm.bind(this);
+    this.onDeleteClick = this.onDeleteClick.bind(this);
   }
+
+  componentDidMount(props){
+    let id=this.props.location.state.id;
+    console.log("componentDidMount in viewhotel id:"+id);
+
+    const url = "http://localhost:9000/hotels/"+id; 
+    let headers = new Headers();
+
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
+
+    headers.append('Access-Control-Allow-Origin', url);
+    headers.append('Access-Control-Allow-Credentials', 'true');
+
+    headers.append('GET', 'POST');
+    
+
+    fetch(url, {
+        headers: headers,
+        method: 'GET'
+    })
+    .then(response => response.json())
+      .then(contents => {console.log("in fetch: "+ JSON.stringify(contents));
+                    if(contents.imageUrls==null)
+                    {
+                        this.setState ({
+                            hoteldata : contents,
+                            })   
+                    }
+                    else{
+                          this.setState ({
+                          hoteldata : contents,
+                          })   
+                    } 
+                    let fields = this.state.fields;   
+                    fields["name"] = this.state.hoteldata.name;
+                    fields["location"] = this.state.hoteldata.location;
+                    fields["description"] = this.state.hoteldata.description; 
+                    fields["amenities"] = this.state.hoteldata.amenities; 
+                    fields["price"] = this.state.hoteldata.price; 
+                    fields["rating"] = this.state.hoteldata.rating;
+                    fields["url"] = this.state.hoteldata.url;
+                    fields["imageUrls"] = '';
+                    // this.setState({
+                    //     img:this.state.hoteldata.imageUrls
+                    // })    
+                    console.log("img in component"+this.state.img) 
+                    this.setState({
+                        fields
+                      });      
+            })
+    //.catch(() => console.log("Can’t access " + url + " response. "))
+}
 
   _handleSubmit(e) {
     e.preventDefault();
@@ -77,11 +132,12 @@ constructor() {
             })
             if(r.status==200){
               console.log("success")
+              window.location.reload();
               this.setState(
                 {
                   img:this.state.img.concat(this.state.result)
                 })
-                console.log("img in state appending"+this.state.img)
+                console.log("img in state appending  :  "+this.state.img)
             }
            
          })
@@ -107,6 +163,7 @@ constructor() {
   handleChange(e) {
       let fields = this.state.fields;
       fields[e.target.name] = e.target.value;
+      console.log("fields"+fields[e.target.name]+"="+e.target.value)
       this.setState({
         fields
       });
@@ -124,6 +181,7 @@ constructor() {
           fields["price"] = ""; 
           fields["rating"] = "";
           fields["url"] = "";
+          fields["imageUrls"]="";
           this.setState({fields:fields});
           let store = this.state;
           store.form.name = this.state.fields["name"];
@@ -144,7 +202,7 @@ constructor() {
           console.log("Form url"+this.state.form.url);
           console.log("Form imgurl"+this.state.form.imageUrls);
       var bearerToken = localStorage.getItem('accessToken');
-        const url = "http://localhost:9000/hotels"; 
+        const url = "http://localhost:9000/hotels/"+this.props.location.state.id; 
         var accesstoken = 'Bearer ' + bearerToken;
         console.log(accesstoken);
             let headers = new Headers();
@@ -160,7 +218,7 @@ constructor() {
             e.preventDefault();
             fetch(url, {
                 headers: headers,
-                method: 'POST',
+                method: 'PUT',
                 withCredentials:true,
                 credentials:'include',
                 headers:{
@@ -176,6 +234,7 @@ constructor() {
         {
           
           this.props.history.push(`/profileowner`);
+          window.location.reload()
         }
         })
         //.then(contents => {console.log("in signup fetch: "+ contents);})
@@ -191,7 +250,7 @@ constructor() {
   
       if (!fields["name"]) {
         formIsValid = false;
-        errors["name"] = "*Please enter your name.";
+        errors["name"] = "*Please enter the hotel name.";
       }
       if (!fields["location"]) {
         formIsValid = false;
@@ -228,6 +287,33 @@ constructor() {
       });
       return formIsValid;
     }
+ onDeleteClick(event){
+    
+        let id=this.props.location.state.id;
+            console.log("componentDidMount in viewhotel id:"+id);
+    
+            const url = "http://localhost:9000/hotels/"+id; 
+            let headers = new Headers();
+        
+            headers.append('Content-Type', 'application/json');
+            headers.append('Accept', 'application/json');
+        
+            headers.append('Access-Control-Allow-Origin', url);
+            headers.append('Access-Control-Allow-Credentials', 'true');
+        
+            headers.append('GET', 'POST','DELETE');
+            
+        
+            fetch(url, {
+                headers: headers,
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+              .then(contents => {console.log("in fetch: "+ JSON.stringify(contents));
+                  this.props.history.push(`/profileowner`)      
+            })
+        
+    }
 
 render() {
   let {imagePreviewUrl} = this.state;
@@ -242,6 +328,19 @@ return(
   <div className="hotelformb">
     <div className="imgform">
         <NavBarOwner/><br></br>
+        <div>
+                        <center>
+                    <MDBBtn style={{width:"20em", margin:"6em"}} onClick={this.onDeleteClick} 
+                        type="submit"
+                        gradient="blue"
+                        rounded
+                        className="btn-block z-depth-1a"
+                        name="Delete Hotel" value="deletehotel"
+                        >
+                        Delete Hotel
+                        </MDBBtn>
+                        </center>
+                        </div>
         <div > 
             <MDBCard className="mydivhf">
               <form onSubmit={this.submitHotelForm}>
@@ -255,6 +354,7 @@ return(
                   label="Hotel Name"
                   group
                   name="name" type="text" value={this.state.fields.name} onChange={this.handleChange}
+                  disabled
                   
                 />
                 <div className="errorMsg" >{this.state.errors.name}</div>
@@ -296,7 +396,7 @@ return(
                   name="url" type="url" value={this.state.fields.url} onChange={this.handleChange}
                 />
                 <div className="errorMsg">{this.state.errors.url}</div>
-                <input className="fileInput" type="file" onChange={(e)=>this._handleImageChange(e)} /><br></br>
+                <input className="fileInput" type="file"  onChange={(e)=>this._handleImageChange(e)} /><br></br>
                 <div className="imgPreview" ><br></br>
                   {$imagePreview  }
                 </div><br></br>
@@ -316,4 +416,4 @@ return(
   };
 }
 
-export default HotelForm;
+export default UpdateHotel;

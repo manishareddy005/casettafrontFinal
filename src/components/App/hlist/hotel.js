@@ -2,6 +2,7 @@ import React from 'react';
 import himage from "/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/6.png";
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol,MDBRow } from 'mdbreact';
 import "./index.css";
+
 class Hotel extends React.Component{
 
     constructor(props){
@@ -43,8 +44,8 @@ render(){
     else
     imgurl=this.props.imageUrls[0];
         return(
-            <div className="hstyle">
-           
+        //  <div className="split left">  
+            <div  className="hstyle">
             <MDBCard style={{ width: "20em" ,height: "20em",background: "white",flex:1 }} >
             <MDBCardBody className="text-black">
                 <MDBCardTitle><span>{this.props.name}</span><br></br></MDBCardTitle>
@@ -56,15 +57,14 @@ render(){
                             <span>Rs.{this.props.price}</span><br></br> 
                            {/* <span>{this.props.imageUrls}</span><br></br>     */}
                 </div>
-                <div className="column" style={{marginLeft:"5em",marginTop:"0.5em"}}>
-                <MDBBtn onClick={this.onViewClick} >view</MDBBtn>
+                <div className="column" style={{marginLeft:"5em",marginTop:"-1.65em"}}>
+                <MDBBtn onClick={this.onViewClick} style={{width:"8em"}} gradient="blue" className="btn-block z-depth-1a">view</MDBBtn>
                 </div>
                 </div>
                 </MDBCardBody>
             </MDBCard>
-        
-            
-            </div>
+             </div>
+             //</div>
         )
     }   
 }

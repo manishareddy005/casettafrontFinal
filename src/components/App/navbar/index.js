@@ -48,7 +48,7 @@ class NavBar extends React.Component {
     } else {
       return (
         <div className="row">
-        <NavLink href="/profileowner" className="text-black"><b>My Profile</b></NavLink>
+        <NavLink style={{marginLeft:"2em",marginTop:"0.5em",color:"black"}} href="/profileowner" className="text-black"><b>My Profile</b></NavLink>
       </div>
       );
     }
@@ -64,8 +64,9 @@ class NavBar extends React.Component {
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-            <NavItem>
+            <NavItem style={{marginLeft:"-40em"}}>
             <Filters history={this.props.history}/>
+           
             </NavItem>&nbsp;&nbsp;&nbsp;&nbsp;
             {this.onOwnerLogged()}
               {/* <NavItem>

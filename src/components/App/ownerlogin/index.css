@@ -13,3 +13,6 @@
 .blue-gradient {
   background: linear-gradient(40deg, #075b56, #839ba6) !important;
 }
+.errorMsg{
+  color: blue;
+}

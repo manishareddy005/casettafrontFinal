@@ -24,7 +24,7 @@ class PHotelList extends React.Component{
     }
     onEditClick(id){
         {console.log("phlist id"+id)}
-        let path=`/hotelform`;
+        let path=`/updatehotel`;
         this.props.history.push({
             pathname: path,
             state: {

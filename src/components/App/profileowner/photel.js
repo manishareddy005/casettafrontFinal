@@ -8,6 +8,7 @@ class PHotel extends React.Component{
         super(props)
        this.onViewClick=this.onViewClick.bind(this)
        this.onEditClick=this.onEditClick.bind(this)
+    //    this.onDeleteClick=this.onDeleteClick.bind(this)
        this.state={
            id:""
        }
@@ -44,6 +45,7 @@ onEditClick(event){
     
 }
 
+
 render(){
     let imgurl;
     if(this.props.imageUrls==null)
@@ -53,21 +55,22 @@ render(){
         return(
             <div className="hstyle">
            
-            <MDBCard style={{ width: "20em" ,height: "25em",background: "white",flex:1 }} >
+            <MDBCard style={{ width: "20em" ,height: "auto",background: "white",flex:1 }} >
             <MDBCardBody className="text-black">
                 <MDBCardTitle><span>{this.props.name}</span><br></br></MDBCardTitle>
                 <MDBCardImage className="imgcard" src={imgurl} width="100%" height="50%" waves />
-                <div className="row">
-                <div className="column" style={{marginLeft:"1em",marginTop:"1em"}}>
+                <div >
+                <div style={{marginLeft:"1em",marginTop:"1em"}}>
                 
                             <span>{this.props.location}</span><br></br>
                             <span>Rs.{this.props.price}</span><br></br> 
                            {/* <span>{this.props.imageUrls}</span><br></br>     */}
             
                 </div>
-                <div className="column" style={{marginLeft:"2em",marginTop:"0.5em"}}>
-                <MDBBtn onClick={this.onViewClick} >view</MDBBtn>&nbsp;&nbsp;&nbsp;&nbsp;
-                <MDBBtn onClick={this.onEditClick} >Edit</MDBBtn>
+                <div className="row" style={{marginLeft:"1em",marginTop:"0.5em"}}>
+                <MDBBtn onClick={this.onViewClick} style={{width:"8em"}} gradient="blue" className="btn-block z-depth-1a">view</MDBBtn>&nbsp;&nbsp;&nbsp;&nbsp;
+                <MDBBtn onClick={this.onEditClick} style={{width:"8em"}} gradient="blue" className="btn-block z-depth-1a">Edit</MDBBtn>
+               {/* <MDBBtn onClick={this.onDeleteClick} >Delete</MDBBtn> */}
                 </div>
                 </div>
                 </MDBCardBody>

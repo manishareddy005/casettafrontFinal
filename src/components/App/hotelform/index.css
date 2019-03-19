@@ -31,6 +31,9 @@
     max-height: auto;
     background-attachment: scroll;
   }
+  .errorMsg{
+      color: blue;
+  }
 
 /* .pink-textarea textarea.md-textarea:focus:not([readonly]) {
     border-bottom: 1px solid #f48fb1;
