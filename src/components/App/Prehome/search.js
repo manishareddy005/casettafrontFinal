@@ -23,12 +23,14 @@ class Search extends React.Component{
             console.log("location searched:"+loc);
           }
          let path=`home`;
+         sessionStorage.setItem('location',loc)
          this.props.history.push({
             pathname: path,
             state: {
              loc:loc
             }
            });  
+           
       }
 
       handleChange(e) {

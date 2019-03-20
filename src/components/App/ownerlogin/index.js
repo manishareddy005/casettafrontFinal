@@ -86,6 +86,7 @@ class LoginPage extends React.Component{
                   name:this.state.form.username
                   }
                 });  
+                sessionStorage.setItem('oname',this.state.form.username)
              
               })
             }

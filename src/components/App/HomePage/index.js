@@ -79,12 +79,12 @@ class HomePage extends React.Component{
                 })
       } 
       onOwnerLogged() {
-         if(this.props.location.state.name != null) 
+         if(sessionStorage.getItem('oname') != null) 
          {
            return (
              <div>
-            <NavBar history={this.props.history} oname={this.props.location.state.name}/><br></br>
-             <center><h2>Welcome back&nbsp;{this.props.location.state.name}...</h2></center>
+            <NavBar history={this.props.history} oname={sessionStorage.getItem('oname')}/><br></br>
+             <center><h2>Welcome back&nbsp;{sessionStorage.getItem('oname')}...</h2></center>
            </div>
            );
          }

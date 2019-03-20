@@ -99,9 +99,8 @@ import {
            'Access-Control-Allow-Origin': url
           }
         })
-        .then(localStorage.removeItem('accessToken'))
-       
-
+        .then(
+            sessionStorage.clear())
   }
 
 
@@ -131,7 +130,8 @@ import {
                 <NavLink href="/home" className="text-black"><img src={profileo} height="50%" width="50%"/></NavLink>
               </NavItem> */}
               <NavItem>
-                <NavLink href="/login" className="text-black" onClick={this.onSignOut}><img src={signout} height="50%" width="50%"/></NavLink>
+                <NavLink href="/login
+                " className="text-black" onClick={this.onSignOut}><img src={signout} height="50%" width="50%"/></NavLink>
               </NavItem>
             </Nav>
           </Collapse>

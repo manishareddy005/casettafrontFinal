@@ -46,6 +46,8 @@ class Filters extends React.Component{
             console.log("price searched:"+price);
           }
          let path=`home`;
+         sessionStorage.setItem('location',loc);
+        sessionStorage.setItem('price',price)
          this.props.history.push({
             pathname: path,
             state: {
@@ -54,6 +56,7 @@ class Filters extends React.Component{
             }
             
            });  
+           
            window.location.reload()
       }
 
