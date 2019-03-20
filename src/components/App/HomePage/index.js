@@ -17,11 +17,18 @@ class HomePage extends React.Component{
       super(props);
       this.onOwnerLogged=this.onOwnerLogged.bind(this);
       this.state={
-         sdata:[]
+         sdata:[],
+         rt:{
+            type:''
+         }
       }
     }
 
     componentDidMount(){
+       console.log("type in homepage:"+sessionStorage.getItem("type"))
+       let storet = this.state;
+          storet.rt.type = sessionStorage.getItem("type"); 
+          this.setState(storet);
       let params
        if((this.props.location.state.loc!=null)&&(this.props.location.state.price!=null))
        {
@@ -69,7 +76,8 @@ class HomePage extends React.Component{
       
           fetch(url, {
               headers: headers,
-              method: 'GET'
+              method: 'POST',
+              body: JSON.stringify(this.state.rt)
           })
           .then(response => response.json())
           .then(contents => {console.log("in fetch: "+ JSON.stringify(contents));
@@ -97,12 +105,6 @@ class HomePage extends React.Component{
          }
        } 
    render(){
-      if(global.search=="true")
-      {
-         console.log("search:"+global.search)
-      return(<div>Search=true</div>)
-      }
-      else{
       return(
                      <div className="homeb">
                       <div className="img">
@@ -115,7 +117,7 @@ class HomePage extends React.Component{
                         <FooterPage/>
                      </div>
                   )
-   }}
+   }
 }
 
 

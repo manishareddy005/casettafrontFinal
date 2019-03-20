@@ -5,6 +5,8 @@ import Search from "./search";
 
 class PreHome extends React.Component{
     render(){
+        sessionStorage.setItem('type',"single");
+        console.log("prehome type:"+sessionStorage.getItem('type'))
         return(
             <div className="homeb">
             <div className="img">

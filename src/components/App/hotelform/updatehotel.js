@@ -23,7 +23,7 @@ constructor() {
       fields: {},
       errors: {},
       file: '',
-      imagePreviewUrl: '',
+      imagePreviewUrl: [],
       result:'',
       img:[],
       hoteldata:[],

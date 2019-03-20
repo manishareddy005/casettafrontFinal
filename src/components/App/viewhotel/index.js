@@ -80,7 +80,9 @@ class ViewHotel extends React.Component{
                                     <div style={{marginTop:"2em"}}>
                                     <h5>
                                             <span className="details" >Location&nbsp;&nbsp;:&nbsp;&nbsp;{this.state.hoteldata.location}</span><br></br>
-                                            <span className="details" >Price&nbsp;&nbsp;:&nbsp;&nbsp;{this.state.hoteldata.price}</span><br></br>  
+                                            <span className="details" >Price for Singlr room&nbsp;&nbsp;:&nbsp;&nbsp;{this.state.hoteldata.sprice}</span><br></br>
+                                            <span className="details" >Price for double room&nbsp;&nbsp;:&nbsp;&nbsp;{this.state.hoteldata.dprice}</span><br></br>    
+                                            <span className="details" >Price for suite&nbsp;&nbsp;:&nbsp;&nbsp;{this.state.hoteldata.suprice}</span><br></br>  
                                             <span className="details" >Ranking&nbsp;&nbsp;:&nbsp;&nbsp;{this.state.hoteldata.rating}</span><br></br>  
                                             <span className="details" >Description&nbsp;&nbsp;:&nbsp;&nbsp;{this.state.hoteldata.description}</span><br></br> 
                                             <span className="details" >Amenities&nbsp;&nbsp;:&nbsp;&nbsp;{this.state.hoteldata.amenities}</span><br></br> 

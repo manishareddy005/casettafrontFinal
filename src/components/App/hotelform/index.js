@@ -144,7 +144,7 @@ constructor() {
           console.log("Form url"+this.state.form.url);
           console.log("Form imgurl"+this.state.form.imageUrls);
       var bearerToken = localStorage.getItem('accessToken');
-        const url = "http://localhost:9000/hotels"; 
+        const url = "http://localhost:9000/hotel"; 
         var accesstoken = 'Bearer ' + bearerToken;
         console.log(accesstoken);
             let headers = new Headers();

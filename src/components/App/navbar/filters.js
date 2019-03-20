@@ -12,6 +12,7 @@ class Filters extends React.Component{
           form: {
             location: '',
             price:'',
+            type:''
           },
           fields: {},
         }
@@ -21,6 +22,7 @@ class Filters extends React.Component{
         let fields = {};
           fields["location"] = "";
           fields["price"] = ""; 
+          fields["type"] = "";
           this.setState({fields:fields});
 
           let store = this.state;
@@ -29,6 +31,7 @@ class Filters extends React.Component{
           this.setState(store);
           console.log("filter price"+this.state.form.price);
           console.log("filter location"+this.state.form.location);
+          console.log("filter type"+sessionStorage.getItem("type"));
           let loc=this.state.form.location;
           let price=this.state.form.price;
           if(loc)
@@ -56,15 +59,19 @@ class Filters extends React.Component{
             }
             
            });  
-           
            window.location.reload()
       }
 
       handleChange(e) {
         let fields = this.state.fields;
         fields[e.target.name] = e.target.value;
-        // console.log("e.target.name:"+e.target.name)
-        // console.log("e.target.value:"+fields[e.target.name])
+        console.log("e.target.name:"+e.target.name)
+        console.log("e.target.value:"+fields[e.target.name])
+        if(e.target.name=="type")
+        {
+          console.log("type is target")
+          sessionStorage.setItem("type",e.target.value)
+        }
         this.setState({
           fields
         });
@@ -77,7 +84,13 @@ class Filters extends React.Component{
                     <Row >
                       <div class="input-group">
                       <input type="text" name="location" class="form-control" placeholder="search hotels by location or name" value={this.state.fields["location"]} style={{height:'100%',width:'50%'}} onChange={this.handleChange}/>
-                     &nbsp;<input type="number" name="price" class="form-control" placeholder="price < than"  value={this.state.fields["price"]} style={{height:'100%'}} onChange={this.handleChange}/>
+                     &nbsp;<input type="number" name="price" class="form-control" placeholder="price < than"  value={this.state.fields["price"]} style={{height:'100%'}} onChange={this.handleChange}/>&nbsp;
+                     <select name="type" onChange={this.handleChange} value={sessionStorage.getItem("type")}>
+                     
+                       <option  value="single" >single</option>
+                       <option value="double">double</option>
+                       <option value="suite">suite</option>
+                     </select>
                       <div class="input-group-append">
                         <button class="btn btn-secondary" type="button" onClick={this.onButtonClick}>
                           <i class="fa fa-search"></i>
