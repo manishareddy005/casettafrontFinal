@@ -14,8 +14,8 @@ import {
 
   import { Button, Popover, PopoverHeader, PopoverBody } from 'reactstrap';
   import "./index.css";
- import signout from "/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/logout.png";
- import profileo from "/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/profile.png";
+ import signout from "/Users/etrupthi/Documents/casettafrontFinal/src/components/App/image/logout.png";
+ import profileo from "/Users/etrupthi/Documents/casettafrontFinal/src/components/App/image/profile.png";
  import '../Prehome/search.css';
 
  class NavBarOwner extends React.Component {
@@ -109,7 +109,7 @@ import {
       <div>
       
         <Navbar color="none" light expand="md">
-          <NavbarBrand className="text-black"><b><img src = {require("/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/logo1.png")} width="200" height = "100" ></img></b></NavbarBrand>
+          <NavbarBrand className="text-black"><b><img src = {require("/Users/etrupthi/Documents/casettafrontFinal/src/components/App/image/logo1.png")} width="200" height = "100" ></img></b></NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>

@@ -8,3 +8,30 @@
   .imgurl{
     height:50vh;
 }
+.cardD {
+  background-color:white;
+  float: right;
+  width: 40vw;
+  height: 30vh;
+  margin-top: 5vh;
+  margin-right: 30vw;
+  margin-bottom: 2.5vh ;
+  padding-top: 20px;
+  border-radius: 5px;
+  padding: 10px;
+  opacity: .9;
+  border: white;
+
+}
+div .listitemsAmen {
+  background-color: #e6e6e6;
+  width: 150px;
+  height: 127px;
+  padding: 10px;
+  border-radius: 6%;
+  align-content: center;
+}
+.HR {
+  padding-left:20px;
+  border: #fff;
+}

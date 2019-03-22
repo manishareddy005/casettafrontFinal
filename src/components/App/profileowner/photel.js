@@ -1,5 +1,5 @@
 import React from 'react';
-import himage from "/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/6.png";
+import himage from "/Users/etrupthi/Documents/casettafrontFinal/src/components/App/image/6.png";
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol,MDBRow } from 'mdbreact';
 import "./index.css";
 class PHotel extends React.Component{

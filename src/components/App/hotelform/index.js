@@ -10,12 +10,15 @@ class HotelForm extends React.Component {
 constructor() {
     super();
     this.state = {
+      amenities: {},
       form: {
         name:'',
         location: '',
         description:'',
-        amenities:'',
-        price:'',
+        amenities: {},
+        sprice:'',
+        dprice:'',
+        suprice:'',
         rating:'',
         url:'',
         imageUrls:[]
@@ -29,6 +32,7 @@ constructor() {
     };
     this.handleChange = this.handleChange.bind(this);
     this.submitHotelForm = this.submitHotelForm.bind(this);
+    this.onAmenityChange=this.onAmenityChange.bind(this);
   }
 
   _handleSubmit(e) {
@@ -89,6 +93,10 @@ constructor() {
         .catch(() => console.log("Can’t access " + url + " response. "))
       
    }
+   onAmenityChange(e){
+    this.state.amenities[e.target.value]=true;
+    console.log("amenities:"+e.target.value+"="+this.state.amenities[e.target.value])
+ }
   _handleImageChange(e) {
     e.preventDefault();
 
@@ -121,7 +129,9 @@ constructor() {
           fields["location"] = "";
           fields["description"] = ""; 
           fields["amenities"] = ""; 
-          fields["price"] = ""; 
+          fields["sprice"] = ""; 
+          fields["dprice"] = ""; 
+          fields["suprice"] = ""; 
           fields["rating"] = "";
           fields["url"] = "";
           this.setState({fields:fields});
@@ -129,8 +139,10 @@ constructor() {
           store.form.name = this.state.fields["name"];
           store.form.location = this.state.fields["location"];
           store.form.description = this.state.fields["description"];
-          store.form.amenities = this.state.fields["amenities"];
-          store.form.price = this.state.fields["price"];
+          store.form.amenities = this.state.amenities;
+          store.form.sprice = this.state.fields["sprice"];
+          store.form.dprice = this.state.fields["dprice"];
+          store.form.suprice = this.state.fields["suprice"];
           store.form.rating = this.state.fields["rating"];
           store.form.url = this.state.fields["url"];
           store.form.imageUrls=this.state.img;
@@ -201,13 +213,17 @@ constructor() {
         formIsValid = false;
         errors["description"] = "*Please enter the description.";
       }
-      if (!fields["amenities"]) {
+      if (!fields["sprice"]) {
         formIsValid = false;
-        errors["amenities"] = "*Please enter the amenities";
+        errors["sprice"] = "*Please enter the single room price.";
       }
-      if (!fields["price"]) {
+      if (!fields["dprice"]) {
         formIsValid = false;
-        errors["price"] = "*Please enter the price.";
+        errors["dprice"] = "*Please enter the double room price.";
+      }
+      if (!fields["suprice"]) {
+        formIsValid = false;
+        errors["suprice"] = "*Please enter the suite price.";
       }
       if (!fields["rating"]) {
         formIsValid = false;
@@ -272,18 +288,104 @@ return(
                     <br></br>
                 </div>
                 <div className="errorMsg">{this.state.errors.description}</div>
-                <div class="md-form mb-4 pink-textarea active-pink-textarea">
-                    <textarea name="amenities" type="text" id="form18" class="md-textarea form-control" rows="9" value={this.state.fields.amenities} onChange={this.handleChange} ></textarea>
+                <h5><b>Amenities</b></h5>
+                   <div className="cs1" > 
+                       <div className="row">  
+                          <div className="column">
+                               <input id="pool" type="checkbox" name="amenity" value="pool" onChange={this.onAmenityChange}/>
+                               <label for="pool">&nbsp;&nbsp;Pool</label>
+                               <br/>
+                               <input id="gym" type="checkbox" name="amenity" value="gym" onChange={this.onAmenityChange}/>
+                               <label for="gym">&nbsp;&nbsp;Fitness Centre</label>
+                               <br/>
+                               <input id="parking" type="checkbox" name="amenity" value="parking" onChange={this.onAmenityChange}/>
+                               <label for="parking">&nbsp;&nbsp;Valet Parking </label>
+                               <br/>
+                               <input id="business" type="checkbox" name="amenity" value="business" onChange={this.onAmenityChange}/>
+                               <label for="business">&nbsp;&nbsp;Business Centre</label>
+                               <br></br>
+                               <input id="breakfast" type="checkbox" name="amenity" value="breakfast" onChange={this.onAmenityChange}/>
+                               <label for="breakfast">&nbsp;&nbsp;Complimentary Breakfast</label>
+                               <br/>
+                               <input id="bar" type="checkbox" name="amenity" value="bar" onChange={this.onAmenityChange}/>
+                               <label for="bar">&nbsp;&nbsp;Bar or Lounge</label>
+                               <br/>
+                               <input id="ocheckin" type="checkbox" name="amenity" value="ocheckin" onChange={this.onAmenityChange}/>
+                               <label for="ocheckin">&nbsp;&nbsp;Online Checkin </label>
+                               <br/>
+                          </div> 
+                          <div className="column" style={{marginLeft:"5em"}}>
+                               <input id="pets" type="checkbox" name="amenity" value="pets" onChange={this.onAmenityChange}/>
+                               <label for="pets">&nbsp;&nbsp;Pet-friendly </label>
+                               <br/>
+                               <input id="playarea" type="checkbox" name="amenity" value="playarea" onChange={this.onAmenityChange}/>
+                               <label for="playarea">&nbsp;&nbsp;Play area </label>
+                               <br/>
+                               <input id="library" type="checkbox" name="amenity" value="library" onChange={this.onAmenityChange}/>
+                               <label for="library">&nbsp;&nbsp;Library</label>
+                               <br/>
+                               <input id="theatre" type="checkbox" name="amenity" value="theatre" onChange={this.onAmenityChange}/>
+                               <label for="theatre">&nbsp;&nbsp;Theatre</label>
+                               <br/>
+                               <input id="laundry" type="checkbox" name="amenity" value="laundry" onChange={this.onAmenityChange}/>
+                               <label for="breakfast">&nbsp;&nbsp;Laundry</label>
+                               <br/>
+                               <input id="handicapped" type="checkbox" name="amenity" value="handicapped" onChange={this.onAmenityChange}/>
+                               <label for="handicapped">&nbsp;&nbsp;Handicapped Facilities </label>
+                               <br/>
+                               <input id="medical" type="checkbox" name="amenity" value="medical" onChange={this.onAmenityChange}/>
+                               <label for="medical">&nbsp;&nbsp;Medical Aid </label>
+                               <br/>
+                        </div>
+                     </div>  
+
+                     </div> 
+                     <h5><b>In-Room Amenities</b></h5>   
+                       <div className="cs">      
+                               <input id="wifi" type="checkbox" name="amenity" value="wifi" onChange={this.onAmenityChange}/>
+                               <label for="wifi">&nbsp;&nbsp;Wifi</label>
+                               <br/>
+                               <input id="airConditioning" type="checkbox" name="amenity" value="airConditioner" onChange={this.onAmenityChange}/>
+                               <label for="airConditioning">&nbsp;&nbsp;Air Conditioning</label>
+                               <br/>
+                               <input id="iron" type="checkbox" name="amenity" value="iron"onChange={this.onAmenityChange}/>
+                               <label for="iron">&nbsp;&nbsp;Iron</label>
+                               <br/>
+                               <input id="fridge" type="checkbox" name="amenity" value="fridge"onChange={this.onAmenityChange}/>
+                               <label for="fridge">&nbsp;&nbsp;Mini Fridge/Bar</label>
+                               <br/>
+                               <input id="refreshments" type="checkbox" name="amenity" value="refreshments"onChange={this.onAmenityChange}/>
+                               <label for="refreshments">&nbsp;&nbsp;Refreshments </label>
+                               <br/>
+                               <input id="connrooms" type="checkbox" name="amenity" value="connrooms"onChange={this.onAmenityChange}/>
+                               <label for="connrooms">&nbsp;&nbsp;Connecting Rooms </label>
+                               <br/>
+                     </div> 
+                     <br></br> 
+                {/* <div class="md-form mb-4 pink-textarea active-pink-textarea"> */}
+                    {/* <textarea name="amenities" type="text" id="form18" class="md-textarea form-control" rows="9" value={this.state.fields.amenities} onChange={this.handleChange} ></textarea>
                     <label for="form18">Amenities</label>
                     <br></br>
                 </div>
-                <div className="errorMsg">{this.state.errors.amenities}</div>
+                <div className="errorMsg">{this.state.errors.amenities}</div> */}
                 <MDBInput
-                  label="Price (in Rs.)"
+                  label="Single room Price (in Rs.)"
                   group
-                  name="price" type="number" value={this.state.fields.price} onChange={this.handleChange}
+                  name="sprice" type="number" value={this.state.fields.sprice} onChange={this.handleChange}
                 />
-                <div className="errorMsg">{this.state.errors.price}</div>
+                <div className="errorMsg">{this.state.errors.sprice}</div>
+                <MDBInput
+                  label="Double room Price (in Rs.)"
+                  group
+                  name="dprice" type="number" value={this.state.fields.dprice} onChange={this.handleChange}
+                />
+                <div className="errorMsg">{this.state.errors.dprice}</div>
+                <MDBInput
+                  label="Suite Price (in Rs.)"
+                  group
+                  name="suprice" type="number" value={this.state.fields.suprice} onChange={this.handleChange}
+                />
+                <div className="errorMsg">{this.state.errors.suprice}</div>
                 <MDBInput
                   label="Ranking of the hotel (in stars)"
                   group
