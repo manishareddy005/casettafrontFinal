@@ -36,7 +36,7 @@ class PHotelList extends React.Component{
         return(
             <CardDeck>
             <div className="hliststyle">
-                {this.props.hotel.map(h => <PHotel user={h.user} key={h.id}  id={h.id} name={h.name} location={h.location} price={h.price} imageUrls={h.imageUrls} history={this.props.history} onViewClick={this.onViewClick} onEditClick={this.onEditClick}/>)}
+                {this.props.hotel.map(h => <PHotel user={h.user} key={h.id}  id={h.id} name={h.name} location={h.location} sprice={h.sprice} imageUrls={h.imageUrls} history={this.props.history} onViewClick={this.onViewClick} onEditClick={this.onEditClick}/>)}
             </div>
             </CardDeck>
         )

@@ -12,6 +12,8 @@ import {
    Redirect,
 } from 'react-router-dom';
 import HotelList from "../hlist";
+import MapCall from "./mapcall";
+
 class HomePage extends React.Component{
    constructor(props){
       super(props);
@@ -98,7 +100,7 @@ class HomePage extends React.Component{
          }
          else{
             return(
-               <div>
+               <div >
             <NavBar history={this.props.history}/><br></br>
             </div>
             );
@@ -106,17 +108,22 @@ class HomePage extends React.Component{
        } 
    render(){
       return(
-                     <div className="homeb">
-                      <div className="img">
-                           {/* <NavBar history={this.props.history} oname={this.props.location.state.name}/><br></br> */}
-                           {this.onOwnerLogged()}
-                           <HotelList 
-                              hotel={this.state.sdata}
-                              history={this.props.history}/>
-                        </div>
-                        <FooterPage/>
-                     </div>
-                  )
+            <div className="homeb" >
+            <div className="img">
+            {this.onOwnerLogged()}
+            <div className="row" >
+                  {/* <NavBar history={this.props.history} oname={this.props.location.state.name}/><br></br> */}
+                  <HotelList 
+                     hotel={this.state.sdata}
+                     history={this.props.history}/>
+                     <div style={{ height:"50vh" , marginLeft: "10vh", width: "92vh" }}>
+                  <MapCall/>
+                  </div>
+               </div>
+               </div>
+               <FooterPage/>
+            </div>
+         )
    }
 }
 

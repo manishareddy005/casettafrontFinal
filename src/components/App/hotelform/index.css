@@ -7,10 +7,11 @@
     margin-left: -13%;
     min-width:30%;
     max-width:auto; 
+    margin-right:20vh;
    /* min-height:relative;
     max-height:auto; */
-    margin-left: 25%;
-    margin-right:25%;
+    margin-left: 55vh;
+    width: 90vh
 
 }
 .imgform{
@@ -66,6 +67,12 @@
   label{
     font-weight:normal;
   }  
+
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
 /* .pink-textarea textarea.md-textarea:focus:not([readonly]) {
     border-bottom: 1px solid #f48fb1;
     box-shadow: 0 1px 0 0 #f48fb1;

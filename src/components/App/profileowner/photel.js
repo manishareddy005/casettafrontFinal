@@ -63,7 +63,7 @@ render(){
                 <div style={{marginLeft:"1em",marginTop:"1em"}}>
                 
                             <span>{this.props.location}</span><br></br>
-                            <span>Rs.{this.props.price}</span><br></br> 
+                            <span>Rs.{this.props.sprice}</span><br></br> 
                            {/* <span>{this.props.imageUrls}</span><br></br>     */}
             
                 </div>

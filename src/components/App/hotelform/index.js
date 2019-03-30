@@ -5,7 +5,23 @@ import FooterPage from "../footer/index";
 import "../image/index.css";
 import "../index.css";
 import NavBarOwner from "../NavbarOwner/index";
+//import MapCall from "../HomePage/mapcall";
+import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
+import L from 'leaflet';
+import './map.css';
+
+delete L.Icon.Default.prototype._getIconUrl;
+
+L.Icon.Default.mergeOptions({
+    iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+    iconUrl: require('leaflet/dist/images/marker-icon.png'),
+    shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+});
+const position = [17.440081, 78.348915];
+
 class HotelForm extends React.Component {
+
+  
 
 constructor() {
     super();
@@ -21,18 +37,25 @@ constructor() {
         suprice:'',
         rating:'',
         url:'',
-        imageUrls:[]
+        imageUrls:[],
+        latitude:'',
+        longitude:''
       },
       fields: {},
       errors: {},
       file: '',
       imagePreviewUrl: '',
       result:'',
-      img:[]
+      img:[],
+      markers:[],
+      latitude:'',
+      longitude:''
     };
     this.handleChange = this.handleChange.bind(this);
     this.submitHotelForm = this.submitHotelForm.bind(this);
     this.onAmenityChange=this.onAmenityChange.bind(this);
+    this.setMarker=this.setMarker.bind(this);
+    this.handleClick=this.handleClick.bind(this);
   }
 
   _handleSubmit(e) {
@@ -68,9 +91,11 @@ constructor() {
         })               
         .then(r=> {r.json()
          .then(response=>{console.log(response)
+          console.log("response :" +JSON.stringify(response.image_url))
             this.setState ({
               result: JSON.stringify(response.image_url)
             })
+            console.log("result :" + this.state.result)
             console.log("result image:"+this.state.result.replace('\"','',))
             this.setState ({
               result: this.state.result.replace('\"','',)
@@ -94,7 +119,7 @@ constructor() {
       
    }
    onAmenityChange(e){
-    this.state.amenities[e.target.value]=true;
+    this.state.amenities[e.target.value]= !this.state.amenities[e.target.value];
     console.log("amenities:"+e.target.value+"="+this.state.amenities[e.target.value])
  }
   _handleImageChange(e) {
@@ -128,7 +153,6 @@ constructor() {
           fields["name"] = "";
           fields["location"] = "";
           fields["description"] = ""; 
-          fields["amenities"] = ""; 
           fields["sprice"] = ""; 
           fields["dprice"] = ""; 
           fields["suprice"] = ""; 
@@ -140,6 +164,8 @@ constructor() {
           store.form.location = this.state.fields["location"];
           store.form.description = this.state.fields["description"];
           store.form.amenities = this.state.amenities;
+          store.form.latitude = this.state.latitude;
+          store.form.longitude = this.state.longitude;
           store.form.sprice = this.state.fields["sprice"];
           store.form.dprice = this.state.fields["dprice"];
           store.form.suprice = this.state.fields["suprice"];
@@ -151,7 +177,7 @@ constructor() {
           console.log("Form location"+this.state.form.location);
           console.log("Form description"+this.state.form.description);
           console.log("Form amenities"+this.state.form.amenities);
-          console.log("Form price"+this.state.form.price);
+          console.log("Form sprice"+this.state.form.sprice);
           console.log("Form ranking"+this.state.form.rating);
           console.log("Form url"+this.state.form.url);
           console.log("Form imgurl"+this.state.form.imageUrls);
@@ -213,6 +239,14 @@ constructor() {
         formIsValid = false;
         errors["description"] = "*Please enter the description.";
       }
+      if (!fields["latitude"]) {
+        formIsValid = false;
+        errors["latitude"] = "*Please enter the description.";
+      }
+      if (!fields["longitude"]) {
+        formIsValid = false;
+        errors["longitude"] = "*Please enter the description.";
+      }
       if (!fields["sprice"]) {
         formIsValid = false;
         errors["sprice"] = "*Please enter the single room price.";
@@ -244,6 +278,31 @@ constructor() {
       });
       return formIsValid;
     }
+    setMarker = ({latitude, longitude}) => {
+      this.setState({
+        markers: [...this.state.markers, {
+          latitude,
+          longitude 
+        }]
+      })
+    }
+
+handleClick = (e) => {
+  this.setMarker({
+    latitude: e.latlng.lat,
+    longitude: e.latlng.lng 
+  });
+  console.log("latitude",e.latlng.lat,"longitude",e.latlng.lng )
+  this.setState({
+    latitude:e.latlng.lat,
+    longitude:e.latlng.lng
+  })
+  // localStorage.setItem("latitude",e.latlng.lat);
+  // localStorage.setItem("longitude",e.latlng.lng);
+  
+};
+
+
 
 render() {
   let {imagePreviewUrl} = this.state;
@@ -258,7 +317,7 @@ return(
   <div className="hotelformb">
     <div className="imgform">
         <NavBarOwner/><br></br>
-        <div > 
+       
             <MDBCard className="mydivhf">
               <form onSubmit={this.submitHotelForm}>
               <MDBCardBody className="mx-4">
@@ -281,13 +340,38 @@ return(
                  
                 />
                 <div className="errorMsg">{this.state.errors.location}</div>
+                
                 <div class="md-form mb-4 pink-textarea active-pink-textarea">
                  <label for="form18">Description</label>
-                    <textarea name="description" type="text" id="form18" class="md-textarea form-control" rows="9" value={this.state.fields.description} onChange={this.handleChange} ></textarea>
-                    
+                    <textarea name="description" type="text" id="form18" class="md-textarea form-control" rows="9" value={this.state.fields.description} onChange={this.handleChange} >
+                    </textarea>
                     <br></br>
                 </div>
                 <div className="errorMsg">{this.state.errors.description}</div>
+                <div>Please pin the location on the map..</div>
+                <div>
+                  <Map
+                    ref={this.mapRef}
+                    center={position} 
+                    zoom={13} 
+                    style={{ height: '450px', width: '100%' }}
+                    onClick={this.handleClick}
+                  >
+                    <TileLayer
+                      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                      attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+                    />
+                    {
+                      this.state.markers.map((m) => (
+                        <Marker position={[parseFloat(m.latitude), parseFloat(m.longitude)]}>
+                          <Popup>latitude:{m.latitude}<br />longitude:{m.longitude}</Popup>
+                        </Marker>
+                      ))
+                      }
+                  </Map> 
+                  </div>
+                <MDBInput label="Latitude" group name="latitude" type="text" value={this.state.latitude}  />
+                <MDBInput label="Longitude" group name="longitude" type="text" value={this.state.longitude}  />
                 <h5><b>Amenities</b></h5>
                    <div className="cs1" > 
                        <div className="row">  
@@ -362,12 +446,7 @@ return(
                                <br/>
                      </div> 
                      <br></br> 
-                {/* <div class="md-form mb-4 pink-textarea active-pink-textarea"> */}
-                    {/* <textarea name="amenities" type="text" id="form18" class="md-textarea form-control" rows="9" value={this.state.fields.amenities} onChange={this.handleChange} ></textarea>
-                    <label for="form18">Amenities</label>
-                    <br></br>
-                </div>
-                <div className="errorMsg">{this.state.errors.amenities}</div> */}
+               
                 <MDBInput
                   label="Single room Price (in Rs.)"
                   group
@@ -392,12 +471,16 @@ return(
                   name="rating" type="number" value={this.state.fields.rating} onChange={this.handleChange}
                 />
                 <div className="errorMsg">{this.state.errors.rating}</div>
+
                 <MDBInput
                   label="Your Website"
                   group
                   name="url" type="url" value={this.state.fields.url} onChange={this.handleChange}
                 />
                 <div className="errorMsg">{this.state.errors.url}</div>
+                {/* <div>
+                  <ImageUpload/>
+                </div> */}
                 <input className="fileInput" type="file" onChange={(e)=>this._handleImageChange(e)} /><br></br>
                 <div className="imgPreview" ><br></br>
                   {$imagePreview  }
@@ -411,7 +494,6 @@ return(
               </form>
             </MDBCard>
       </div>
-    </div>
     <FooterPage/>
   </div>
   );

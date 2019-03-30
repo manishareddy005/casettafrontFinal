@@ -8,6 +8,9 @@ import HotelForm from "./hotelform";
 import PreHome from "./Prehome";
 import ProfileOwner from "./profileowner";
 import HomePage from "./HomePage";
+import Header from "./header";
+import LeafletMap from "./map/index";
+import  'leaflet/dist/leaflet.css';
 import {
    BrowserRouter as Router,
    Route,
@@ -22,8 +25,22 @@ import UpdateHotel from "./hotelform/updatehotel";
 // import LeafletMap from "./map";
 
 class App extends React.Component{
+
+   // state = {
+   //    markers: [],
+   //  };
+  
+   //  setMarker = ({latitude, longitude}) => {
+   //    this.setState({
+   //      markers: [...this.state.markers, {
+   //        latitude,
+   //        longitude 
+   //      }]
+   //    })
+   //  }
    
    render(props){
+      console.log(this.state)
       return(
          <Router>
             <Switch>
@@ -44,9 +61,13 @@ class App extends React.Component{
                <Route exact path="/updatehotel" component={UpdateHotel}/>
 
 
-               <Route exact path="/maps" component={Map}/>
-               <Route exact path="/trialmap" component={SimpleMap}/>
-
+               {/* /<Route exact path="/maps" component={Map}/> */}
+               {/* <Route className="App"style={{textAlign: "left"}} exact path="/trialmap" render = {(props) => {
+                 return <div>
+                          <Header setMarker={this.setMarker}/>
+                          <LeafletMap markers={this.state.markers} setMarker={this.setMarker}/>
+                        </div>
+               }}/> */}
 
                <Redirect to="/prehome"/>
             </Switch> 
