@@ -60,7 +60,7 @@ class NavBar extends React.Component {
       <div>
       
         <Navbar color="none" light expand="md">
-          <NavbarBrand href="/"><b><img src = {require("/Users/etrupthi/Documents/casettafrontFinal/src/components/App/image/logo1.png")} width="150" height = "80" ></img></b></NavbarBrand>
+          <NavbarBrand href="/"><b><img src = {require("/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/logo1.png")} width="150" height = "80" ></img></b></NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>

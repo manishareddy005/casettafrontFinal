@@ -5,7 +5,7 @@ import FooterPage from "../footer";
 import "../image/index.css";
 import "../index.css";
 import styled from "styled-components";
-import himage from "/Users/etrupthi/Documents/casettafrontFinal/src/components/App/image/bg2.jpeg";
+import himage from "/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/bg2.jpeg";
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol,MDBRow } from 'mdbreact';
 import {Carousel} from "react-bootstrap";
 const H = styled.div`

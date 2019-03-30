@@ -11,7 +11,7 @@ class PreHome extends React.Component{
             <div className="homeb">
             <div className="img">
             <div className="mysearch">
-            <center><h5 className="text-white"><b><img src = {require("/Users/etrupthi/Documents/casettafrontFinal/src/components/App/image/logo2.png")} width="250" height = "150" ></img><br></br>
+            <center><h5 className="text-white"><b><img src = {require("/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/logo2.png")} width="250" height = "150" ></img><br></br>
                                Hyderabad</b></h5></center><br></br>
                <center> <Search history={this.props.history} /></center>
               </div>

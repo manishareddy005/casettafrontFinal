@@ -5,6 +5,21 @@ import FooterPage from "../footer/index";
 import "../image/index.css";
 import "../index.css";
 import NavBarOwner from "../NavbarOwner/index";
+import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
+import L from 'leaflet';
+import './map.css';
+
+
+
+delete L.Icon.Default.prototype._getIconUrl;
+
+L.Icon.Default.mergeOptions({
+    iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+    iconUrl: require('leaflet/dist/images/marker-icon.png'),
+    shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+});
+const position = [17.440081, 78.348915];
+
 class UpdateHotel extends React.Component {
 
 constructor() {
@@ -16,6 +31,8 @@ constructor() {
         location: '',
         description:'',
         amenities: {},
+        latitude:'',
+        longitude:'',
         sprice:'',
         dprice:'',
         suprice:'',
@@ -26,9 +43,12 @@ constructor() {
       fields: {},
       errors: {},
       file: '',
+      latitude:'',
+      longitude:'',
       imagePreviewUrl: [],
       result:'',
       img:[],
+      markers:[],
       hoteldata:[],
     };
     this.handleChange = this.handleChange.bind(this);
@@ -77,6 +97,8 @@ constructor() {
                     fields["location"] = this.state.hoteldata.location;
                     fields["description"] = this.state.hoteldata.description; 
                     //fields["amenities"] = this.state.hoteldata.amenities; 
+                    fields["latitude"] = this.state.hoteldata.latitude;  
+                    fields["longitude"] = this.state.hoteldata.longitude;  
                     fields["sprice"] = this.state.hoteldata.sprice;  
                     fields["dprice"] = this.state.hoteldata.dprice; 
                     fields["suprice"] = this.state.hoteldata.suprice; 
@@ -88,7 +110,9 @@ constructor() {
                     // })    
                     console.log("img in component"+this.state.img) 
                     this.setState({
-                        fields
+                        fields,
+                        latitude:this.state.hoteldata.latitude,
+                        longitude:this.state.hoteldata.longitude
                       });      
             })
     //.catch(() => console.log("Can’t access " + url + " response. "))
@@ -184,7 +208,8 @@ _handleSubmit(e) {
           fields["name"] = "";
           fields["location"] = "";
           fields["description"] = ""; 
-          //fields["amenities"] = ""; 
+          fields["latitude"] = ""; 
+          fields["longitude"] = "";  
           fields["sprice"] = ""; 
           fields["dprice"] = ""; 
           fields["suprice"] = ""; 
@@ -197,6 +222,8 @@ _handleSubmit(e) {
           store.form.location = this.state.fields["location"];
           store.form.description = this.state.fields["description"];
           store.form.amenities = this.state.amenities;
+          store.form.latitude=this.state.fields["latitude"];
+          store.form.longitude=this.state.fields["longitude"];
           store.form.sprice = this.state.fields["sprice"];
           store.form.dprice = this.state.fields["dprice"];
           store.form.suprice = this.state.fields["suprice"];
@@ -209,6 +236,8 @@ _handleSubmit(e) {
           console.log("Form description"+this.state.form.description);
           console.log("Form amenities"+this.state.form.amenities);
           console.log("Form sprice"+this.state.form.sprice);
+          console.log("Form lat"+this.state.form.latitude);
+          console.log("Form log"+this.state.form.longitude);
           console.log("Form dprice"+this.state.form.dprice);
           console.log("Form suprice"+this.state.form.suprice);
           console.log("Form ranking"+this.state.form.rating);
@@ -273,6 +302,7 @@ _handleSubmit(e) {
         formIsValid = false;
         errors["description"] = "*Please enter the description.";
       }
+     
       
       if (!fields["sprice"]) {
         formIsValid = false;
@@ -290,6 +320,15 @@ _handleSubmit(e) {
         formIsValid = false;
         errors["rating"] = "*Please enter the ranking.";
       }
+      // if (!fields["latitude"]) {
+      //   formIsValid = false;
+      //   errors["latitude"] = "*Please point the location on the map";
+      // }
+      // if (!fields["longitude"]) {
+      //   formIsValid = false;
+      //   errors["longitude"] = "*Please point the location on the map";
+      // }
+
       if (typeof fields["rating"] !== "undefined") {
         if (!fields["rating"].match(/^[1-5]$/)) {
           formIsValid = false;
@@ -336,6 +375,36 @@ _handleSubmit(e) {
       this.state.amenities[e.target.value]= !this.state.amenities[e.target.value];
       console.log("amenities:"+e.target.value+"="+this.state.amenities[e.target.value])
    }
+
+   setMarker = ({latitude, longitude}) => {
+    this.setState({
+      markers: [...this.state.markers, {
+        latitude,
+        longitude 
+      }]
+    })
+  }
+
+  handleClick = (e) => {
+    this.setMarker({
+      latitude: e.latlng.lat,
+      longitude: e.latlng.lng 
+    });
+    //return( <Popup>latitude:{e.latlng.lat}<br />longitude:{e.latlng.lng }</Popup>)
+    console.log("latitude",e.latlng.lat,"longitude",e.latlng.lng )
+    // localStorage.setItem("latitude",e.latlng.lat);
+    // localStorage.setItem("longitude",e.latlng.lng);
+    this.setState({
+      latitude:e.latlng.lat,
+      longitude:e.latlng.lng
+    })
+    let fields = this.state.fields;   
+    fields["latitude"] = e.latlng.lat;  
+    fields["longitude"] =e.latlng.lng ;  
+    this.setState({
+      fields,})
+   
+  };
 
 render() {
   let {imagePreviewUrl} = this.state;
@@ -394,6 +463,46 @@ return(
                     <br></br>
                 </div>
                 <div className="errorMsg">{this.state.errors.description}</div>
+
+
+
+                <div>
+                    <Map
+                      ref={this.mapRef}
+                      center={position} 
+                      zoom={13} 
+                      style={{ height: '400px', width: '100%' }}
+                      onClick={this.handleClick}
+                    >
+                      <TileLayer
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+                      />
+                      {
+                        this.state.markers.map((m) => (
+                          <Marker position={[parseFloat(m.latitude), parseFloat(m.longitude)]}>
+                            <Popup>latitude:{m.latitude}<br />longitude:{m.longitude}</Popup>
+                          </Marker>
+                        ))
+                        }
+                    </Map> 
+                    <MDBInput
+                      label="Latitude"
+                      group
+                      name="latitude" type="text" value={this.state.fields.latitude} onChange={this.handleChange}
+                      />
+                      
+                    <MDBInput
+                      label="Longitude"
+                      group
+                      name="longitude" type="text" value={this.state.fields.longitude} onChange={this.handleChange}
+                     />
+                    
+                </div>
+
+
+
+
                 <h5><b>Amenities</b></h5>
                    <div className="cs1" > 
                        <div className="row">  

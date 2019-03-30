@@ -18,8 +18,6 @@ import {
    Redirect,
 } from 'react-router-dom';
 import ImageUpload from "./hotelform/imgupload";
-import Map from "./mapbox/App";
-import SimpleMap from "./maps";
 import UpdateHotel from "./hotelform/updatehotel";
 // import Header from "./header";
 // import LeafletMap from "./map";
