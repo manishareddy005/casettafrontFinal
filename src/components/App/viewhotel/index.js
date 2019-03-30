@@ -273,7 +273,7 @@ class ViewHotel extends React.Component{
                                     <Map
                                                 ref={this.mapRef}
                                                 center={position} 
-                                                zoom={5} 
+                                                zoom={13} 
                                                 style={{ height: '350px', width: '100%' }}
                                                 >
                                                 <TileLayer

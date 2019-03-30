@@ -147,7 +147,7 @@ class HomePage extends React.Component{
                            <Map
                            ref={this.mapRef}
                            center={position} 
-                           zoom={5} 
+                           zoom={13} 
                            style={{ height: '600px', width: '35%' }}
                            onClick={this.handleClick}
                            >
