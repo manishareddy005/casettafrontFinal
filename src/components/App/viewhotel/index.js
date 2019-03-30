@@ -6,6 +6,10 @@ import "../image/index.css";
 import "../index.css";
 import styled from "styled-components";
 import himage from "/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/bg2.jpeg";
+
+import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
+import L from 'leaflet';
+import './map.css';
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol,MDBRow } from 'mdbreact';
 import {Carousel} from "react-bootstrap";
 const H = styled.div`
@@ -13,24 +17,38 @@ const H = styled.div`
   background: white;
   width: 50%;`;
 
+  delete L.Icon.Default.prototype._getIconUrl;
+
+L.Icon.Default.mergeOptions({
+    iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+    iconUrl: require('leaflet/dist/images/marker-icon.png'),
+    shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+});
+const position = [17.440081, 78.348915];
+
+
 
 class ViewHotel extends React.Component{
 
     constructor(props){
         super(props)
          this.state = {
-         name:'',
-         location:'',
-         sprice:'',
-         dprice:'',
-         suprice:'',
-         description:'',
-         rating:'',
-         url:'',
+            name:'',
+            location: '',
+            description:'',
+            latitude:'',
+            longitude:'',
+            sprice:'',
+            dprice:'',
+            suprice:'',
+            rating:'',
+            url:'',
+    
          amenities: [],
             output: [],
             output1: [],
          imgurls:[],
+         markers:[],
         }
     }
     componentDidMount(props){
@@ -67,6 +85,8 @@ class ViewHotel extends React.Component{
                                 description:contents.description,
                                 url:contents.url,
                                 amenities:contents.amenities,
+                                latitude:contents.latitude,
+                                longitude:contents.longitude,
                                 imgurls : contents.imageUrls})   
                                   
                         }
@@ -82,6 +102,16 @@ class ViewHotel extends React.Component{
         //.catch(() => console.log("Can’t access " + url + " response. "))
        
     }
+
+
+    setMarker = ({latitude, longitude}) => {
+        this.setState({
+          markers: [...this.state.markers, {
+            latitude,
+            longitude 
+          }]
+        })
+      }
 
    
     render(){
@@ -213,13 +243,14 @@ class ViewHotel extends React.Component{
                                             <span className="details" >Price for suite&nbsp;&nbsp;:&nbsp;&nbsp;{this.state.suprice}</span><br></br>  
                                             <span className="details" >Ranking&nbsp;&nbsp;:&nbsp;&nbsp;{this.state.rating}</span><br></br>  
                                             <span className="details" >Description&nbsp;&nbsp;:&nbsp;&nbsp;{this.state.description}</span><br></br> 
-                                            <span className="details" >URL&nbsp;&nbsp;:&nbsp;&nbsp;<a href={this.state.url}>visit the site</a></span><br></br>  
+                                            <span className="details" >Latitude&nbsp;&nbsp;:&nbsp;&nbsp;{this.state.latitude}</span><br></br> 
+                                            <span className="details" >Longitude&nbsp;&nbsp;:&nbsp;&nbsp;{this.state.longitude}</span><br></br> 
+                                            <span className="details" >URL&nbsp;&nbsp;:&nbsp;&nbsp;<a href={this.state.url}>visit the site</a></span><br></br>  <hr></hr>
                                             
                      
                             <b><h1 style={{ fontSize: '50px' }}>Amenities</h1></b>
                             <br />
                             <center>
-
                                 {this.state.output.map((home, index) => {
                                     const id = `${home.id}`
                                     // const path= `/detailsPage/`+id
@@ -235,14 +266,32 @@ class ViewHotel extends React.Component{
                                     )
                                 })}
                             </center>
-                       
-                        <br />
-                        <hr />
-                       
-                                    
+                             <br></br><br></br>
                                     </h5>
-                                    
                                     </div>
+                                    <hr />
+                                    <Map
+                                                ref={this.mapRef}
+                                                center={position} 
+                                                zoom={5} 
+                                                style={{ height: '350px', width: '100%' }}
+                                                >
+                                                <TileLayer
+                                                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                                    attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+                                                />
+                                            
+                                
+                                                <Marker position={[this.state.latitude,this.state.longitude]}>
+                                                <Popup minWidth={100} closeButton={true} minHeight={10}>
+                                                    <div>
+                                                    <b>{this.state.name}</b>
+                                                    <p>latitude:{this.state.latitude}</p>
+                                                    <p>longitude:{this.state.longitude}</p>
+                                                    </div>
+                                                </Popup>
+                                                </Marker>
+                                 </Map>
                                     </MDBCardBody>
                                 </MDBCard>
                                 

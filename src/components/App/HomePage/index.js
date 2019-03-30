@@ -5,6 +5,9 @@ import FooterPage from "../footer";
 import "../image/index.css";
 import "../index.css";
 import '../global.js';
+import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
+import L from 'leaflet';
+import './map.css';
 import {
    BrowserRouter as Router,
    Route,
@@ -14,6 +17,15 @@ import {
 import HotelList from "../hlist";
 import MapCall from "./mapcall";
 
+delete L.Icon.Default.prototype._getIconUrl;
+
+L.Icon.Default.mergeOptions({
+    iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+    iconUrl: require('leaflet/dist/images/marker-icon.png'),
+    shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+});
+const position = [17.440081, 78.348915];
+
 class HomePage extends React.Component{
    constructor(props){
       super(props);
@@ -22,7 +34,8 @@ class HomePage extends React.Component{
          sdata:[],
          rt:{
             type:''
-         }
+         },
+         markers: [],
       }
     }
 
@@ -105,20 +118,64 @@ class HomePage extends React.Component{
             </div>
             );
          }
-       } 
+       
+      }
+      
+      
+      setMarker = ({latitude, longitude}) => {
+         this.setState({
+           markers: [...this.state.markers, {
+             latitude,
+             longitude 
+           }]
+         })
+       }
+
+
    render(){
       return(
             <div className="homeb" >
             <div className="img">
             {this.onOwnerLogged()}
             <div className="row" >
-                  {/* <NavBar history={this.props.history} oname={this.props.location.state.name}/><br></br> */}
+                 <div style={{width:"60%"}}>
                   <HotelList 
                      hotel={this.state.sdata}
                      history={this.props.history}/>
-                     <div style={{ height:"50vh" , marginLeft: "10vh", width: "92vh" }}>
-                  <MapCall/>
-                  </div>
+                     </div>
+                     
+                           <Map
+                           ref={this.mapRef}
+                           center={position} 
+                           zoom={5} 
+                           style={{ height: '600px', width: '35%' }}
+                           onClick={this.handleClick}
+                           >
+                           <TileLayer
+                              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                              attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+                           />
+                     
+                                 {this.state.sdata.map((m,index) => (
+                                    
+                                 <div key={index}>
+                                 <Marker position={[parseFloat(m.latitude),parseFloat(m.longitude)]}>
+                                 <Popup minWidth={100} closeButton={true} minHeight={10}>
+                                    <div>
+                                    <b>{m.name}</b>
+                                    <p>latitude:{m.latitude}</p>
+                                    <p>longitude:{m.longitude}</p>
+                                    </div>
+                                 </Popup>
+                                 </Marker>
+                                 {
+                                    console.log(m.latitude)
+                                 }
+                              </div>
+                                    ))}
+
+                                 </Map>
+                  
                </div>
                </div>
                <FooterPage/>
