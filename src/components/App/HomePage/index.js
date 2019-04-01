@@ -176,10 +176,10 @@ class HomePage extends React.Component{
                                  <Popup minWidth={"200"} closeButton={true} minHeight={10}>
                                  
                                     <div>
-                                    <b>{m.name}</b>
+                                    <b>{m.name}</b><br></br>
                                     <Carousel>
                                         {m.imageUrls.map(function (img, j) { return <img key={j} src={img} width="80%" /> })}
-                                    </Carousel>
+                                    </Carousel><br></br>
                                     {m.location}
                                     
                                     </div>

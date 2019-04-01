@@ -282,13 +282,17 @@ class ViewHotel extends React.Component {
 
 
                                                 <Marker position={[this.state.latitude, this.state.longitude]}>
-                                                    <Popup minWidth={100} closeButton={true} minHeight={10}>
-                                                        <div>
-                                                            <b>{this.state.name}</b>
-                                                            <p>latitude:{this.state.latitude}</p>
-                                                            <p>longitude:{this.state.longitude}</p>
-                                                        </div>
-                                                    </Popup>
+                                                <Popup minWidth={"200"} closeButton={true} minHeight={10}>
+                                 
+                                                    <div>
+                                                    <b>{this.state.name}</b><br></br>
+                                                    <Carousel>
+                                        {this.state.imgurls.map(function (img, j) { return <img  key={j} src={img} width="80%" /> })}
+                                    </Carousel><br></br>
+                                                    {this.state.location}
+                                                    
+                                                    </div>
+                                                </Popup>
                                                 </Marker>
                                             </Map><br></br><br></br>
                                             <u><b><h1 style={{ fontSize: '30px' }}>Amenities</h1></b> </u>
