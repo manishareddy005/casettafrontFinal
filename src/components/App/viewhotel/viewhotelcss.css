@@ -6,7 +6,7 @@
       float:left;
   }
   .imgurl{
-    height:50vh;
+    height:60vh;
 }
 .cardD {
   background-color:white;
@@ -24,7 +24,7 @@
 
 }
 div .listitemsAmen {
-  background-color: #e6e6e6;
+  background-color:white;
   width: 150px;
   height: 127px;
   padding: 10px;

@@ -2,12 +2,15 @@ import React from "react";
 import NavBar from "../navbar/index";
 import HotelDisplay from "../hoteldisplay/index";
 import FooterPage from "../footer";
+import himage from "/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/6.png";
 import "../image/index.css";
 import "../index.css";
 import '../global.js';
+import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol,MDBRow } from 'mdbreact';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import L from 'leaflet';
 import './map.css';
+import { Carousel } from "react-bootstrap";
 import {
    BrowserRouter as Router,
    Route,
@@ -36,6 +39,7 @@ class HomePage extends React.Component{
             type:''
          },
          markers: [],
+         imgurls:[]
       }
     }
 
@@ -96,8 +100,17 @@ class HomePage extends React.Component{
           })
           .then(response => response.json())
           .then(contents => {console.log("in fetch: "+ JSON.stringify(contents));
+          if (contents.imageUrls != null) {
                               this.setState ({
-                              sdata : contents})    
+                              sdata : contents,
+                              imgurls: contents.imageUrls})  
+          }
+          else{
+            this.setState({
+               sdata : contents,
+               imgurls: [{ himage }]
+           })
+          }  
                               
                 })
       } 
@@ -107,7 +120,7 @@ class HomePage extends React.Component{
            return (
              <div>
             <NavBar history={this.props.history} oname={sessionStorage.getItem('oname')}/><br></br>
-             <center><h2>Welcome back&nbsp;{sessionStorage.getItem('oname')}...</h2></center>
+             <center><h3>Welcome&nbsp;{sessionStorage.getItem('oname')}</h3></center>
            </div>
            );
          }
@@ -148,7 +161,7 @@ class HomePage extends React.Component{
                            ref={this.mapRef}
                            center={position} 
                            zoom={13} 
-                           style={{ height: '600px', width: '35%' }}
+                           style={{ height: '100vh', width: '40%',marginLeft:"-5vh",marginTop:"5vh" }}
                            onClick={this.handleClick}
                            >
                            <TileLayer
@@ -160,11 +173,15 @@ class HomePage extends React.Component{
                                     
                                  <div key={index}>
                                  <Marker position={[parseFloat(m.latitude),parseFloat(m.longitude)]}>
-                                 <Popup minWidth={100} closeButton={true} minHeight={10}>
+                                 <Popup minWidth={"200"} closeButton={true} minHeight={10}>
+                                 
                                     <div>
                                     <b>{m.name}</b>
-                                    <p>latitude:{m.latitude}</p>
-                                    <p>longitude:{m.longitude}</p>
+                                    <Carousel>
+                                        {m.imageUrls.map(function (img, j) { return <img key={j} src={img} width="80%" /> })}
+                                    </Carousel>
+                                    {m.location}
+                                    
                                     </div>
                                  </Popup>
                                  </Marker>
@@ -175,6 +192,7 @@ class HomePage extends React.Component{
                                     ))}
 
                                  </Map>
+                                
                   
                </div>
                </div>

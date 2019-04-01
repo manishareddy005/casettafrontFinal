@@ -319,7 +319,7 @@ return(
     <div className="imgform">
         <NavBarOwner/><br></br>
         <div > 
-            <MDBCard className="mydivhf">
+        <MDBCard style={{ minWidth: "10em", maxWidth: "50%", minHeight: "40em", maxHeight: "auto", background: "white", flex: 1,marginLeft:"25%" }} >
               <form onSubmit={this.submitHotelForm}>
               <MDBCardBody className="mx-4">
                 <div className="text-center">
