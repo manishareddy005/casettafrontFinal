@@ -8,6 +8,8 @@ import NavBarOwner from "../NavbarOwner/index";
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import L from 'leaflet';
 import './map.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimesCircle ,faImages} from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -535,13 +537,13 @@ return(
                   {this.state.imagesPreviewUrls.map(function(image, i){
                     return (
                         <div>
-                                                <div 
+                           <div 
                             onClick={() => this.removeImage(image)} 
                             className='delete'
                           >
-                            {/* <FontAwesomeIcon icon={faTimesCircle} size='2x' /> */}
+                            <FontAwesomeIcon icon={faTimesCircle} size='1x'/>
                           </div>
-                            <img key={i} className='fadein' src={image} width="50px" />
+                            <img key={i} className='fadein' src={image} width="200px" style={{padding:"1vh"}} />
                         </div>
                         )
                      })}

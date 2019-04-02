@@ -12,8 +12,9 @@ class ImageUpload extends React.Component {
         this.state = {
         files: [],
         imagesPreviewUrls: []
-    };
-    this.removeImage=this.removeImage.bind(this);
+       };
+    //this.removeImage=this.removeImage.bind(this);
+    //this.onDeleteImage=this.onDeleteImage.bind(this);
     }
     _handleImageChange = e =>{
         e.preventDefault();
@@ -36,15 +37,30 @@ class ImageUpload extends React.Component {
         });
     }
 
-removeImage = id => {
+ removeImage(i){
+   console.log("i",i);
+   console.log(this.state.imagesPreviewUrls);
+   let remimg=this.state.imagesPreviewUrls.splice(i,1)
     this.setState({
-      imagesPreviewUrls: this.state.imagesPreviewUrls.filter(image => image.public_id !== id)
+      imagesPreviewUrls: remimg
+     
     })
+    console.log(this.state.imagesPreviewUrls);
+    this.setState({
+        imagesPreviewUrls: this.state.imagesPreviewUrls
+       
+      })
+     
   }
+  
 
     render() {
         let {imagesPreviewUrls} = this.state;
-
+        // const onDeleteImage=function(i){
+        //     console.log("hello");
+        //     console.log("i",i);
+        //     {this.removeImage(i)}
+        //   }
         return (
             <div>
                 <label  className="btn btn-default btn-sm z-depth-0 mr-0 pl-2 pr-2 custom-file-upload waves-effect waves-light" htmlFor='file'>
@@ -53,16 +69,14 @@ removeImage = id => {
                     <input className="upload" type='file' id='multi' onChange={this._handleImageChange} multiple />
                 </label>
                 {/* <FontAwesomeIcon icon={faTimesCircle} size='2x' /> */}
-                {imagesPreviewUrls.map(function(imagePreviewUrl, i){
+                {this.state.imagesPreviewUrls.map((imagePreviewUrl, index)=>{
+                    
                     return (
-                        <div>
-                             <div 
-        onClick={() => this.removeImage(imagePreviewUrl)} 
-        className='delete'
-      >
-        <FontAwesomeIcon icon={faTimesCircle} size='2x' />
-      </div>
-                            <img key={i} className='fadein' src={imagePreviewUrl} />
+                        <div key={index}>
+                           
+        <FontAwesomeIcon icon={faTimesCircle} size='2x' onClick={this.removeImage.bind(this,index)}/>
+     
+                            <img key={index} className='fadein' src={imagePreviewUrl} />
                         </div>
                         )
                 })}
