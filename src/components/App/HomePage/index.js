@@ -33,6 +33,7 @@ class HomePage extends React.Component{
    constructor(props){
       super(props);
       this.onOwnerLogged=this.onOwnerLogged.bind(this);
+      this.onViewClick=this.onViewClick.bind(this);
       this.state={
          sdata:[],
          rt:{
@@ -133,18 +134,17 @@ class HomePage extends React.Component{
          }
        
       }
-      
-      
-      setMarker = ({latitude, longitude}) => {
-         this.setState({
-           markers: [...this.state.markers, {
-             latitude,
-             longitude 
-           }]
-         })
-       }
-
-
+ 
+       onViewClick(id){
+         {console.log("hlist id"+id)}
+         let path=`/viewhotel/${id}`;
+         this.props.history.push({
+             pathname: path,
+             state: {
+                id:id
+             }
+            });
+     }
    render(){
       return(
             <div className="homeb" >
@@ -162,7 +162,6 @@ class HomePage extends React.Component{
                            center={position} 
                            zoom={13} 
                            style={{ height: '100vh', width: '40%',marginLeft:"-5vh",marginTop:"5vh" }}
-                           onClick={this.handleClick}
                            >
                            <TileLayer
                               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -173,15 +172,14 @@ class HomePage extends React.Component{
                                     
                                  <div key={index}>
                                  <Marker position={[parseFloat(m.latitude),parseFloat(m.longitude)]}>
-                                 <Popup minWidth={"200"} closeButton={true} minHeight={10}>
+                                 <Popup minWidth={"200"} closeButton={true} minHeight={10}  >
                                  
-                                    <div>
-                                    <b>{m.name}</b><br></br>
+                                    <div onClick={() => this.onViewClick(m.id)}>
+                                  <b>{m.name}</b><br></br>
                                     <Carousel>
-                                        {m.imageUrls.map(function (img, j) { return <img key={j} src={img} width="80%" /> })}
+                                        {m.imageUrls.map(function (img, j) { return <img key={j} src={img} width="80%"  /> })}
                                     </Carousel><br></br>
-                                    {m.location}
-                                    
+                                    {m.location}        
                                     </div>
                                  </Popup>
                                  </Marker>

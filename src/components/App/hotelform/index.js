@@ -494,7 +494,7 @@ return(
                 <div className="errorMsg">{this.state.errors.url}</div>
                 <input className="fileInput" type="file" onChange={(e)=>this._handleImageChange(e)} /><br></br>
                 <div className="imgPreview" ><br></br>
-                  {$imagePreview  }
+                  {$imagePreview}
                 </div><br></br>
                 <button className="submitButton" type="submit" onClick={(e)=>this._handleSubmit(e)}>Upload Image</button><br></br>
                 <div className="text-center mb-3">

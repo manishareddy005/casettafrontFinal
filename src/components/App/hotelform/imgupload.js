@@ -1,12 +1,20 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimesCircle ,faImages} from '@fortawesome/free-solid-svg-icons';
+
+
 
 
 class ImageUpload extends React.Component {
-    state = {
+    constructor(props)
+    {
+        super(props);
+        this.state = {
         files: [],
         imagesPreviewUrls: []
     };
-
+    this.removeImage=this.removeImage.bind(this);
+    }
     _handleImageChange = e =>{
         e.preventDefault();
 
@@ -39,12 +47,24 @@ removeImage = id => {
 
         return (
             <div>
-                <label className="btn btn-default btn-sm z-depth-0 mr-0 pl-2 pr-2 custom-file-upload waves-effect waves-light" htmlFor="file">
+                <label  className="btn btn-default btn-sm z-depth-0 mr-0 pl-2 pr-2 custom-file-upload waves-effect waves-light" htmlFor='file'>
                     <i className="fas fa-image fa-fw" aria-hidden="true"></i>
-                    <input className="upload" type="file" onChange={this._handleImageChange} multiple removeImage={this.removeImage}/>
+                    {/* <FontAwesomeIcon icon={faTimesCircle} size='2x' /> */}
+                    <input className="upload" type='file' id='multi' onChange={this._handleImageChange} multiple />
                 </label>
+                {/* <FontAwesomeIcon icon={faTimesCircle} size='2x' /> */}
                 {imagesPreviewUrls.map(function(imagePreviewUrl, i){
-                    return <img key={i} src={imagePreviewUrl} />
+                    return (
+                        <div>
+                             <div 
+        onClick={() => this.removeImage(imagePreviewUrl.public_id)} 
+        className='delete'
+      >
+        <FontAwesomeIcon icon={faTimesCircle} size='2x' />
+      </div>
+                            <img key={i} className='fadein' src={imagePreviewUrl} />
+                        </div>
+                        )
                 })}
             </div>
         )

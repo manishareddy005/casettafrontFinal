@@ -255,7 +255,7 @@ class ViewHotel extends React.Component {
                                         <br></br><br></br>
                                         <u><b><h1 style={{ fontSize: '30px' }}>About</h1></b></u>
                                         <p>{this.state.description}</p>
-                                        <a href={this.state.url}><u>visit us at...</u></a><br></br><br></br>
+                                        <a href={this.state.url}><u>website</u></a><br></br><br></br>
                                         <b>{this.state.rating}</b> &nbsp;&nbsp;&nbsp;<img src={ranking} width="50vh"></img><br></br><br></br>
                                         <u><b><h1 style={{ fontSize: '30px' }}>Prices</h1></b></u>
                                              <img src={single} width="50vh"></img>&nbsp;&nbsp;Single Room&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;<b>{this.state.sprice}</b><br></br>
@@ -287,8 +287,8 @@ class ViewHotel extends React.Component {
                                                     <div>
                                                     <b>{this.state.name}</b><br></br>
                                                     <Carousel>
-                                        {this.state.imgurls.map(function (img, j) { return <img  key={j} src={img} width="80%" /> })}
-                                    </Carousel><br></br>
+                                                     {this.state.imgurls.map(function (img, j) { return <img  key={j} src={img} width="80%" /> })}
+                                                  </Carousel><br></br>
                                                     {this.state.location}
                                                     
                                                     </div>
