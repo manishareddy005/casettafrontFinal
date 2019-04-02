@@ -57,7 +57,7 @@ removeImage = id => {
                     return (
                         <div>
                              <div 
-        onClick={() => this.removeImage(imagePreviewUrl.public_id)} 
+        onClick={() => this.removeImage(imagePreviewUrl)} 
         className='delete'
       >
         <FontAwesomeIcon icon={faTimesCircle} size='2x' />

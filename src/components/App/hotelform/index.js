@@ -10,6 +10,7 @@ import L from 'leaflet';
 import './map.css';
 
 
+
 delete L.Icon.Default.prototype._getIconUrl;
 
 L.Icon.Default.mergeOptions({
@@ -44,11 +45,13 @@ constructor() {
       errors: {},
       file: '',
       imagePreviewUrl: '',
-      result:'',
+      result:[],
       img:[],
+      files:[],
       latitude:'',
       longitude:'',
-      markers:[]
+      markers:[],
+      imagesPreviewUrls: []
     };
     this.handleChange = this.handleChange.bind(this);
     this.submitHotelForm = this.submitHotelForm.bind(this);
@@ -60,12 +63,12 @@ constructor() {
     console.log('handle uploading-', this.state.file);
     const url = "http://localhost:9000/images"; 
     const formdata=new FormData()
-      formdata.append("file",this.state.file);
+   this.state.files.forEach(file=> {
+    formdata.append("",file);
+    });
+     
       
     let headers = new Headers();
-
-        formdata.append("file",this.state.file);
-
         headers.append('Content-Type', 'multipart/form-data');
         headers.append('Accept', 'application/json');
     
@@ -91,21 +94,44 @@ constructor() {
             this.setState ({
               result: JSON.stringify(response.image_url)
             })
-            console.log("result image:"+this.state.result.replace('\"','',))
+            console.log("result image:"+this.state.result.replace('\\','',))
             this.setState ({
-              result: this.state.result.replace('\"','',)
+              result: this.state.result.replace('\\','',)
             })
-            console.log("result image:"+this.state.result.replace('\"','',))
+            console.log("result image:"+this.state.result.replace('\\','',))
             this.setState ({
-              result: this.state.result.replace('\"','',)
+              result: this.state.result.replace('\\','',)
             })
             if(r.status==200){
               console.log("success")
-              this.setState(
-                {
-                  img:this.state.img.concat(this.state.result)
+              
+                console.log("img in state appending",this.state.img)
+                console.log("img type:",typeof(this.state.img))
+                console.log("result type:",typeof(this.state.result))
+                let str=this.state.result;
+                //console.log("result image:"+str.replace('[','',))
+                str=str.replace('[','',)
+           
+                //console.log("result image:"+str.replace(']','',))
+                str=str.replace(']','',)
+                console.log("str",str)
+                let arr=str.split(",");
+                let arr1=[];
+                console.log("arr",arr)
+                arr.forEach((ar,i)=>{
+                  ar=ar.replace('\"','')
+                  ar=ar.replace('\"','')
+                  arr1.push(ar)
+                  console.log("ar",ar)
                 })
-                console.log("img in state appending"+this.state.img)
+                
+                console.log("arr1",arr1)
+                this.setState(
+                  {
+                    img:arr1
+                  })
+  
+               
             }
            
          })
@@ -117,21 +143,26 @@ constructor() {
     this.state.amenities[e.target.value]= !this.state.amenities[e.target.value];
     console.log("amenities:"+e.target.value+"="+this.state.amenities[e.target.value])
  }
-  _handleImageChange(e) {
-    e.preventDefault();
+ _handleImageChange = e =>{
+  e.preventDefault();
 
-    let reader = new FileReader();
-    let file = e.target.files[0];
+  // FileList to Array
+  let files = Array.from(e.target.files);
 
-    reader.onloadend = () => {
-      this.setState({
-        file: file,
-        imagePreviewUrl: reader.result
-      });
-    }
+  // File Reader for Each file and and update state arrays
+  files.forEach((file, i) => {
+      let reader = new FileReader();
 
-    reader.readAsDataURL(file)
-  }
+      reader.onloadend = () => {
+          this.setState(prevState => ({
+              files: [...prevState.files, file],
+              imagesPreviewUrls: [...prevState.imagesPreviewUrls, reader.result]
+          }));
+      }
+
+      reader.readAsDataURL(file);
+  });
+}
   handleChange(e) {
       let fields = this.state.fields;
       fields[e.target.name] = e.target.value;
@@ -180,7 +211,8 @@ constructor() {
           console.log("Form longitude"+this.state.form.longitude);
           console.log("Form ranking"+this.state.form.rating);
           console.log("Form url"+this.state.form.url);
-          console.log("Form imgurl"+this.state.form.imageUrls);
+          console.log("Form imgurl",this.state.form.imageUrls);
+          console.log("imgurls type:",typeof(this.state.form.imageUrls))
       var bearerToken = localStorage.getItem('accessToken');
         const url = "http://localhost:9000/hotel"; 
         var accesstoken = 'Bearer ' + bearerToken;
@@ -306,13 +338,14 @@ constructor() {
     };
 
 render() {
-  let {imagePreviewUrl} = this.state;
-      let $imagePreview = null;
-      if (imagePreviewUrl) {
-        $imagePreview = (<img style={{width:"20%",height:"20%"}} src={imagePreviewUrl} />);
-      } else {
-        $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
-      }
+  let {img}=this.state;
+  // let {imagePreviewUrl} = this.state;
+  //     let $imagePreview = null;
+  //     if (imagePreviewUrl) {
+  //       $imagePreview = (<img style={{width:"20%",height:"20%"}} src={imagePreviewUrl} />);
+  //     } else {
+  //       $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
+  //     }
 const { form } = this.state;
 return(
   <div className="hotelformb">
@@ -492,9 +525,26 @@ return(
                   name="url" type="url" value={this.state.fields.url} onChange={this.handleChange}
                 />
                 <div className="errorMsg">{this.state.errors.url}</div>
-                <input className="fileInput" type="file" onChange={(e)=>this._handleImageChange(e)} /><br></br>
+                <label  className="btn btn-default btn-sm z-depth-0 mr-0 pl-2 pr-2 custom-file-upload waves-effect waves-light" htmlFor='file'>
+                    <i className="fas fa-image fa-fw" aria-hidden="true"></i>
+                    {/* <FontAwesomeIcon icon={faTimesCircle} size='2x' /> */}
+                    <input className="upload" type='file' id='multi' onChange={this._handleImageChange} multiple />
+                </label>
                 <div className="imgPreview" ><br></br>
-                  {$imagePreview}
+                  {/* {$imagePreview} */}
+                  {this.state.imagesPreviewUrls.map(function(image, i){
+                    return (
+                        <div>
+                                                <div 
+                            onClick={() => this.removeImage(image)} 
+                            className='delete'
+                          >
+                            {/* <FontAwesomeIcon icon={faTimesCircle} size='2x' /> */}
+                          </div>
+                            <img key={i} className='fadein' src={image} width="50px" />
+                        </div>
+                        )
+                     })}
                 </div><br></br>
                 <button className="submitButton" type="submit" onClick={(e)=>this._handleSubmit(e)}>Upload Image</button><br></br>
                 <div className="text-center mb-3">
