@@ -81,10 +81,10 @@ class Filters extends React.Component{
     render() {                 
         return(
             <div class="container"> 
-                    <Row >
+                    <Row style={{width:"40em"}}>
                       <div class="input-group">
                       <input type="text" name="location" class="form-control" placeholder="search hotels by location or name" value={this.state.fields["location"]} style={{height:'100%',width:'50%'}} onChange={this.handleChange}/>
-                     &nbsp;<input type="number" name="price" class="form-control" placeholder="price < than"  value={this.state.fields["price"]} style={{height:'100%'}} onChange={this.handleChange}/>&nbsp;
+                     &nbsp;<input type="number" name="price" class="form-control" placeholder="price < than"  value={this.state.fields["price"]} style={{height:'100%',width:'19%'}} onChange={this.handleChange}/>&nbsp;
                      <select name="type" onChange={this.handleChange} value={sessionStorage.getItem("type")}>
                      
                        <option  value="single" >single</option>

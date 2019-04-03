@@ -111,6 +111,7 @@ class ProfileOwner extends React.Component{
                     {/* <HotelList 
                          hotel={this.state.ohdata}
                         history={this.props.history}/> */}
+                       <center><b><h1 style={{ fontSize: '40px',fontWeight:"600" }}>My Hotels</h1></b></center>
                         <PHotelList 
                          hotel={this.state.ohdata}
                         history={this.props.history}/>

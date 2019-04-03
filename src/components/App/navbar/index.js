@@ -42,13 +42,13 @@ class NavBar extends React.Component {
     if(this.props.oname == null) {
       return (
         <NavItem>
-        <NavLink href="/login" className="text-black"><b>Owner</b></NavLink>
+        <NavLink href="/login" className="text-black"><b style={{fontWeight:"600"}}>Owner</b></NavLink>
       </NavItem>
       );
     } else {
       return (
         <div className="row">
-        <NavLink style={{marginLeft:"2em",marginTop:"0.5em",color:"black"}} href="/profileowner" className="text-black"><b>My Profile</b></NavLink>
+        <NavLink style={{marginLeft:"2em",marginTop:"0.5em",color:"black"}} href="/profileowner" className="text-black"><b style={{fontWeight:"500"}}>My Profile</b></NavLink>
       </div>
       );
     }
@@ -68,31 +68,7 @@ class NavBar extends React.Component {
             <Filters history={this.props.history}/>
            
             </NavItem>&nbsp;&nbsp;&nbsp;&nbsp;
-            {this.onOwnerLogged()}
-              {/* <NavItem>
-                <NavLink href="/login" className="text-black"><b>Owner</b></NavLink>
-              </NavItem> */}
-              {/* <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap" className="text-black"><b>GitHub</b></NavLink>
-              </NavItem> */}
-              {/* <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret className="text-black">
-                <b>Price</b>
-                </DropdownToggle>
-                <DropdownMenu right>
-                  <DropdownItem>
-                    1000
-                  </DropdownItem>
-                  <DropdownItem>
-                    2000
-                  </DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem>
-                    Reset
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown> */}
-              
+            {this.onOwnerLogged()} &nbsp;&nbsp; &nbsp;       
             </Nav>
           </Collapse>
         </Navbar>

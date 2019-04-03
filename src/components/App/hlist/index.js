@@ -46,6 +46,7 @@ class HotelList extends React.Component{
         
     }
     render(){
+        
         return(
             <CardDeck>
             <div className="hliststyle">

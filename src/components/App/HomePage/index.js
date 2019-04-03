@@ -10,7 +10,7 @@ import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, 
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import L from 'leaflet';
 import './map.css';
-import { Carousel } from "react-bootstrap";
+import { Carousel, Button } from "react-bootstrap";
 import {
    BrowserRouter as Router,
    Route,
@@ -40,7 +40,8 @@ class HomePage extends React.Component{
             type:''
          },
          markers: [],
-         imgurls:[]
+         imgurls:[],
+        
       }
     }
 
@@ -101,6 +102,9 @@ class HomePage extends React.Component{
           })
           .then(response => response.json())
           .then(contents => {console.log("in fetch: "+ JSON.stringify(contents));
+        
+
+         //  {alert("No hotels found!!")}
           if (contents.imageUrls != null) {
                               this.setState ({
                               sdata : contents,
@@ -111,9 +115,15 @@ class HomePage extends React.Component{
                sdata : contents,
                imgurls: [{ himage }]
            })
-          }  
+          } 
+          if(!this.state.sdata[0])
+           {console.log("sdata is:",this.state.sdata[0])
+            alert("No hotels found!!!")
+
+           }
                               
                 })
+                
       } 
       onOwnerLogged() {
          if(sessionStorage.getItem('oname') != null) 
@@ -146,6 +156,7 @@ class HomePage extends React.Component{
             });
      }
    render(){
+      
       return(
             <div className="homeb" >
             <div className="img">
@@ -198,6 +209,8 @@ class HomePage extends React.Component{
             </div>
          )
    }
+ 
+ 
 }
 
 

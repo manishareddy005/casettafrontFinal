@@ -249,6 +249,10 @@ constructor() {
           
           this.props.history.push(`/profileowner`);
         }
+        else if(response.status==400){
+          alert("Hotel already exists!");
+          window.location.reload();
+        }
         })
         //.then(contents => {console.log("in signup fetch: "+ contents);})
         .catch(() => console.log("Can’t access " + url + " response. "))
@@ -555,7 +559,7 @@ return(
                   {this.state.imagesPreviewUrls.map((image, index)=>{
                     return (
                         <div key={index}>                  
-                           <FontAwesomeIcon icon={faTimesCircle} size='1x' onClick={this.removeImage.bind(this,index)}/>
+                           <FontAwesomeIcon icon={faTimesCircle} size='1x' onClick={this.removeImage.bind(this,index,image)}/>
                             <img key={index} className='fadein' src={image} width="200px" style={{padding:"1vh"}} />
                         </div>
                         )
