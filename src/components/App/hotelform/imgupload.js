@@ -74,7 +74,7 @@ class ImageUpload extends React.Component {
                     return (
                         <div key={index}>
                            
-        <FontAwesomeIcon icon={faTimesCircle} size='2x' onClick={this.removeImage.bind(this,index)}/>
+                     <FontAwesomeIcon icon={faTimesCircle} size='2x' onClick={this.removeImage.bind(this,index)}/>
      
                             <img key={index} className='fadein' src={imagePreviewUrl} />
                         </div>

@@ -54,13 +54,16 @@ constructor() {
       files:[],
       markers:[],
       hoteldata:[],
-      imagesPreviewUrls: []
+      imagesPreviewUrls: [],
+      bodyd:{
+        imageUrl:''
+      }
     };
     this.handleChange = this.handleChange.bind(this);
     this.submitHotelForm = this.submitHotelForm.bind(this);
     this.onDeleteClick = this.onDeleteClick.bind(this);
     this.onAmenityChange=this.onAmenityChange.bind(this);
-    this.removeImage=this.removeImage.bind(this);
+   // this.removeImage=this.removeImage.bind(this);
   }
 
   componentDidMount(props){
@@ -235,7 +238,7 @@ _handleSubmit(e) {
   submitHotelForm(e) {
       let res;
       e.preventDefault();
-      if (this.validateForm()) {
+      if (1) {
           let fields = {};
           fields["name"] = "";
           fields["location"] = "";
@@ -438,15 +441,70 @@ _handleSubmit(e) {
       fields,})
    
   };
-  removeImage(image){
-    let imgid=this.state.imagesPreviewUrls.indexOf(image);
-    console.log("imgid",imgid)
-    this.setState({
-      imagesPreviewUrls: this.state.imagesPreviewUrls
-    })
-  }
+  removeImage(e,i){
+    console.log("i",i);
+    console.log(this.state.imagesPreviewUrls);
+    let remimg=this.state.imagesPreviewUrls.splice(i,1)
+    let f=this.state.files.splice(i,1)
+     this.setState({
+       imagesPreviewUrls: remimg,
+       //files:f
+      
+     })
+     console.log(this.state.imagesPreviewUrls);
+     this.setState({
+         imagesPreviewUrls: this.state.imagesPreviewUrls,
+       })
+      
+   }
+   removeImageBack(e,i,image){
+    console.log("i type"+typeof(i));
+    console.log("i:      "+i);
+    let did=this.state.images.findIndex(k=>k==i)
+    console.log("index is",did)
+    console.log(this.state.images);
+    let remimg=this.state.images.splice(did,1)
+    let f=this.state.files.splice(did,1)
+     this.setState({
+       images: remimg,
+       //files:f
+      
+     })
+     console.log(this.state.images);
+     this.setState({
+         images: this.state.images,
+       })
+       //console.log("imageid"+imageid);
+       console.log("image name=",typeof(image))
+       let store = this.state;
+          store.bodyd = i;
+          this.setState(store);
+          console.log("body for delete is:",JSON.stringify(this.state.bodyd))
 
 
+       const url = "http://localhost:9000/image"; 
+            let headers = new Headers();
+        
+            headers.append('Content-Type', 'application/json');
+            headers.append('Accept', 'application/json');
+        
+            headers.append('Access-Control-Allow-Origin', url);
+            headers.append('Access-Control-Allow-Credentials', 'true');
+        
+            headers.append('GET', 'POST','DELETE');
+            
+        
+            fetch(url, {
+                headers: headers,
+                method: 'DELETE',
+                body:"{\"imageUrl\":"+JSON.stringify(this.state.bodyd)+"}"
+            })
+            //.then(response => response.json())
+              // .then(contents => {console.log("in fetch: "+ JSON.stringify(contents)); 
+            // })
+        
+      
+   }
 render() {
   // let {imagePreviewUrl} = this.state;
   //     let $imagePreview = null;
@@ -658,34 +716,19 @@ return(
                   {/* {$imagePreview  } */}
 
 
-                  {this.state.images.map(function(image, i){
+                  {this.state.images.map((image, index)=>{
                     return (
-                        <div>
-                              <div 
-                            onClick={() => this.removeImage(i)} 
-                            className='delete'
-                          >
-                            <FontAwesomeIcon icon={faTimesCircle} size='1x' /> 
-                          </div>
-                            <img key={i} className='fadein' src={image} width="200px" style={{padding:"1vh"}}/>
+                        <div key={index}>                  
+                           <FontAwesomeIcon icon={faTimesCircle} size='1x' onClick={this.removeImageBack.bind(this,index,image)}/>
+                            <img key={index} className='fadein' src={image} width="200px" style={{padding:"1vh"}} />
                         </div>
                         )
                      })}
-
-
-
-                  {this.state.imagesPreviewUrls.map(function(image, i){
-                    console.log("imgid")
+                  {this.state.imagesPreviewUrls.map((image, index)=>{
                     return (
-                        <div>
-                         
-                             <div 
-                            onClick={() => this.removeImage(image)} 
-                            className='delete'
-                          >
-                            <FontAwesomeIcon icon={faTimesCircle} size='1x' />
-                          </div>
-                            <img key={i} className='fadein' src={image} width="200px" style={{padding:"1vh"}} />
+                        <div key={index}>                  
+                           <FontAwesomeIcon icon={faTimesCircle} size='1x' onClick={this.removeImage.bind(this,index)}/>
+                            <img key={index} className='fadein' src={image} width="200px" style={{padding:"1vh"}} />
                         </div>
                         )
                      })}

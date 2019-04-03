@@ -176,7 +176,7 @@ constructor() {
   submitHotelForm(e) {
       let res;
       e.preventDefault();
-      if (this.validateForm()) {
+      if (1) {
           let fields = {};
           fields["name"] = "";
           fields["location"] = "";
@@ -338,6 +338,22 @@ constructor() {
       })
      
     };
+    removeImage(e,i){
+      console.log("i",i);
+      console.log(this.state.imagesPreviewUrls);
+      let remimg=this.state.imagesPreviewUrls.splice(i,1)
+      let f=this.state.files.splice(i,1)
+       this.setState({
+         imagesPreviewUrls: remimg,
+         //files:f
+        
+       })
+       console.log(this.state.imagesPreviewUrls);
+       this.setState({
+           imagesPreviewUrls: this.state.imagesPreviewUrls,
+         })
+        
+     }
 
 render() {
   let {img}=this.state;
@@ -534,16 +550,11 @@ return(
                 </label>
                 <div className="imgPreview" ><br></br>
                   {/* {$imagePreview} */}
-                  {this.state.imagesPreviewUrls.map(function(image, i){
+                  {this.state.imagesPreviewUrls.map((image, index)=>{
                     return (
-                        <div>
-                           <div 
-                            onClick={() => this.removeImage(image)} 
-                            className='delete'
-                          >
-                            <FontAwesomeIcon icon={faTimesCircle} size='1x'/>
-                          </div>
-                            <img key={i} className='fadein' src={image} width="200px" style={{padding:"1vh"}} />
+                        <div key={index}>                  
+                           <FontAwesomeIcon icon={faTimesCircle} size='1x' onClick={this.removeImage.bind(this,index)}/>
+                            <img key={index} className='fadein' src={image} width="200px" style={{padding:"1vh"}} />
                         </div>
                         )
                      })}
