@@ -6,10 +6,11 @@ import "../image/index.css";
 import "../index.css";
 import styled from "styled-components";
 import himage from "/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/bg2.jpeg";
-import suite from "/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/suite.png"
-import single from "/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/sbed.png"
-import double from "/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/dbed.png"
-import ranking from "/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/rating.png"
+import suite from "/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/suite.png";
+import single from "/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/sbed.png";
+import double from "/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/dbed.png";
+import ranking from "/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/rating.png";
+import website from "/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/earth.png";
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import L from 'leaflet';
 import './map.css';
@@ -39,6 +40,7 @@ class ViewHotel extends React.Component {
             name: '',
             location: '',
             description: '',
+            address:'',
             latitude: '',
             longitude: '',
             sprice: '',
@@ -81,6 +83,7 @@ class ViewHotel extends React.Component {
                     this.setState({
                         name: contents.name,
                         location: contents.location,
+                        address: contents.address,
                         sprice: contents.sprice,
                         dprice: contents.dprice,
                         suprice: contents.suprice,
@@ -255,7 +258,8 @@ class ViewHotel extends React.Component {
                                         <br></br><br></br>
                                         <u><b><h1 style={{ fontSize: '30px' }}>About</h1></b></u>
                                         <p>{this.state.description}</p>
-                                        <a href={this.state.url}><u>website</u></a><br></br><br></br>
+                                        
+                                       <a href={this.state.url}  target="_blank"> <img src={website} width="20vh"></img>&nbsp;&nbsp;<u>website</u></a><br></br><br></br>
                                         <b>{this.state.rating}</b> &nbsp;&nbsp;&nbsp;<img src={ranking} width="50vh"></img><br></br><br></br>
                                         <u><b><h1 style={{ fontSize: '30px' }}>Prices</h1></b></u>
                                              <img src={single} width="50vh"></img>&nbsp;&nbsp;Single Room&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;<b>{this.state.sprice}</b><br></br>
@@ -270,7 +274,7 @@ class ViewHotel extends React.Component {
                                             <Map
                                                 ref={this.mapRef}
                                                 center={position}
-                                                zoom={13}
+                                                zoom={11}
                                                 style={{ height: '350px', width: '100%' }}
                                             >
 
@@ -294,7 +298,13 @@ class ViewHotel extends React.Component {
                                                     </div>
                                                 </Popup>
                                                 </Marker>
-                                            </Map><br></br><br></br>
+                                            </Map>
+                                            
+                                            <br></br><br></br>
+                                            <u><b><h1 style={{ fontSize: '30px' }}>Address</h1></b></u>
+                                            <p>{this.state.address}</p>
+                                            
+                                            <br></br><br></br>
                                             <u><b><h1 style={{ fontSize: '30px' }}>Amenities</h1></b> </u>
                                         <div>
                                             <center>

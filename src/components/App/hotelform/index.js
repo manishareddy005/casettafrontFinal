@@ -33,6 +33,7 @@ constructor() {
         name:'',
         location: '',
         description:'',
+        address:'',
         latitude:'',
         longitude:'',
         amenities: {},
@@ -181,6 +182,7 @@ constructor() {
           fields["name"] = "";
           fields["location"] = "";
           fields["description"] = ""; 
+          fields["address"] = ""; 
           fields["amenities"] = ""; 
           fields["sprice"] = "";
           fields["dprice"] = ""; 
@@ -194,6 +196,7 @@ constructor() {
           store.form.name = this.state.fields["name"];
           store.form.location = this.state.fields["location"];
           store.form.description = this.state.fields["description"];
+          store.form.address = this.state.fields["address"];
           store.form.amenities = this.state.amenities;
           store.form.sprice = this.state.fields["sprice"];
           store.form.dprice = this.state.fields["dprice"];
@@ -207,6 +210,7 @@ constructor() {
           console.log("Form name"+this.state.form.name);
           console.log("Form location"+this.state.form.location);
           console.log("Form description"+this.state.form.description);
+          console.log("Form address"+this.state.form.address);
           console.log("Form amenities"+this.state.form.amenities);
           console.log("Form sprice"+this.state.form.sprice);
           console.log("Form latitude"+this.state.form.latitude);
@@ -272,6 +276,10 @@ constructor() {
       if (!fields["location"]) {
         formIsValid = false;
         errors["location"] = "*Please enter the location.";
+      }
+      if (!fields["address"]) {
+        formIsValid = false;
+        errors["address"] = "*Please enter the address.";
       }
       // if (!fields["latitude"]) {
       //   formIsValid = false;
@@ -391,13 +399,21 @@ return(
                   
                 />
                 <div className="errorMsg" >{this.state.errors.name}</div>
+
                 <MDBInput
                   label="Location"
                   group
-                  name="location" type="text" value={this.state.fields.location} onChange={this.handleChange}
-                 
+                  name="location" type="text" value={this.state.fields.location} onChange={this.handleChange} 
                 />
                 <div className="errorMsg">{this.state.errors.location}</div>
+
+                <MDBInput
+                  label="Address"
+                  group
+                  name="address" type="text" value={this.state.fields.address} onChange={this.handleChange} 
+                />
+                <div className="errorMsg">{this.state.errors.address}</div>
+
                 <div class="md-form mb-4 pink-textarea active-pink-textarea">
                  <label for="form18">Description</label>
                     <textarea name="description" type="text" id="form18" class="md-textarea form-control" rows="9" value={this.state.fields.description} onChange={this.handleChange} ></textarea>
@@ -408,7 +424,7 @@ return(
                     <Map
                       ref={this.mapRef}
                       center={position} 
-                      zoom={13} 
+                      zoom={11} 
                       style={{ height: '400px', width: '100%' }}
                       onClick={this.handleClick}
                     >

@@ -171,7 +171,7 @@ class HomePage extends React.Component{
                            <Map
                            ref={this.mapRef}
                            center={position} 
-                           zoom={13} 
+                           zoom={11} 
                            style={{ height: '100vh', width: '40%',marginLeft:"-5vh",marginTop:"5vh" }}
                            >
                            <TileLayer

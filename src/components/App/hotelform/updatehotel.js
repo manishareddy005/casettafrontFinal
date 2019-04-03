@@ -33,6 +33,7 @@ constructor() {
         name:'',
         location: '',
         description:'',
+        address:'',
         amenities: {},
         latitude:'',
         longitude:'',
@@ -105,6 +106,7 @@ constructor() {
                     fields["name"] = this.state.hoteldata.name;
                     fields["location"] = this.state.hoteldata.location;
                     fields["description"] = this.state.hoteldata.description; 
+                    fields["address"] = this.state.hoteldata.address; 
                     //fields["amenities"] = this.state.hoteldata.amenities; 
                     fields["latitude"] = this.state.hoteldata.latitude;  
                     fields["longitude"] = this.state.hoteldata.longitude;  
@@ -243,6 +245,7 @@ _handleSubmit(e) {
           fields["name"] = "";
           fields["location"] = "";
           fields["description"] = ""; 
+          fields["address"] = ""; 
           fields["latitude"] = ""; 
           fields["longitude"] = "";  
           fields["sprice"] = ""; 
@@ -256,6 +259,7 @@ _handleSubmit(e) {
           store.form.name = this.state.fields["name"];
           store.form.location = this.state.fields["location"];
           store.form.description = this.state.fields["description"];
+          store.form.address = this.state.fields["address"];
           store.form.amenities = this.state.amenities;
           store.form.latitude=this.state.fields["latitude"];
           store.form.longitude=this.state.fields["longitude"];
@@ -269,6 +273,7 @@ _handleSubmit(e) {
           console.log("Form name"+this.state.form.name);
           console.log("Form location"+this.state.form.location);
           console.log("Form description"+this.state.form.description);
+          console.log("Form address"+this.state.form.address);
           console.log("Form amenities"+this.state.form.amenities);
           console.log("Form sprice"+this.state.form.sprice);
           console.log("Form lat"+this.state.form.latitude);
@@ -334,12 +339,14 @@ _handleSubmit(e) {
         formIsValid = false;
         errors["location"] = "*Please enter the location.";
       }
+      if (!fields["address"]) {
+        formIsValid = false;
+        errors["address"] = "*Please enter the address.";
+      }
       if (!fields["description"]) {
         formIsValid = false;
         errors["description"] = "*Please enter the description.";
       }
-     
-      
       if (!fields["sprice"]) {
         formIsValid = false;
         errors["sprice"] = "*Please enter the single room price.";
@@ -550,13 +557,21 @@ return(
                   
                 />
                 <div className="errorMsg" >{this.state.errors.name}</div>
+                
                 <MDBInput
                   label="Location"
                   group
                   name="location" type="text" value={this.state.fields.location} onChange={this.handleChange}
-                 
                 />
                 <div className="errorMsg">{this.state.errors.location}</div>
+
+                <MDBInput
+                  label="Address"
+                  group
+                  name="address" type="text" value={this.state.fields.address} onChange={this.handleChange}
+                />
+                <div className="errorMsg">{this.state.errors.address}</div>
+
                 <div class="md-form mb-4 pink-textarea active-pink-textarea">
                  <label for="form18">Description</label>
                     <textarea name="description" type="text" id="form18" class="md-textarea form-control" rows="9" value={this.state.fields.description} onChange={this.handleChange} ></textarea>
