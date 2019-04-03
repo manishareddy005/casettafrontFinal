@@ -80,3 +80,7 @@
 .active-pink-textarea.md-form label.active {
     color: #f48fb1;
 } */
+.btn-default {
+  background:linear-gradient(40deg, #075b56, #839ba6) !important;
+  color: #fff;
+}

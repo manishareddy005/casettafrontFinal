@@ -340,23 +340,23 @@ constructor() {
     };
     
     removeImage(e,i,image){
-      console.log("i",i);
-      let did=this.state.imagesPreviewUrls.findIndex(k=>k==i)
-      console.log("index is",did)
-      console.log(this.state.imagesPreviewUrls);
-      let remimg=this.state.imagesPreviewUrls.splice(did,1)
-      let f=this.state.files.splice(did,1)
-       this.setState({
-         imagesPreviewUrls: remimg,
-         //files:f
-        
+    console.log("i",i);
+    let did=this.state.imagesPreviewUrls.findIndex(k=>k==i)
+    console.log("index is",did)
+    console.log(this.state.imagesPreviewUrls);
+    let remimg=this.state.imagesPreviewUrls.splice(did,1)
+    let f=this.state.files.splice(did,1)
+     this.setState({
+       imagesPreviewUrls: remimg,
+       //files:f
+      
+     })
+     console.log(this.state.imagesPreviewUrls);
+     this.setState({
+         imagesPreviewUrls: this.state.imagesPreviewUrls,
        })
-       console.log(this.state.imagesPreviewUrls);
-       this.setState({
-           imagesPreviewUrls: this.state.imagesPreviewUrls,
-         })
-        
-     }
+      
+   }
 render() {
   let {img}=this.state;
   // let {imagePreviewUrl} = this.state;
@@ -555,7 +555,7 @@ return(
                   {this.state.imagesPreviewUrls.map((image, index)=>{
                     return (
                         <div key={index}>                  
-                           <FontAwesomeIcon icon={faTimesCircle} size='1x' onClick={this.removeImage.bind(this,index,image)}/>
+                           <FontAwesomeIcon icon={faTimesCircle} size='1x' onClick={this.removeImage.bind(this,index)}/>
                             <img key={index} className='fadein' src={image} width="200px" style={{padding:"1vh"}} />
                         </div>
                         )
