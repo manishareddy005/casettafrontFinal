@@ -42,13 +42,13 @@ class NavBar extends React.Component {
     if(this.props.oname == null) {
       return (
         <NavItem>
-        <NavLink href="/login" className="text-black"><b style={{fontWeight:"600"}}>Owner</b></NavLink>
+        <NavLink href="/login" className="text-black"><b style={{fontSize:"22px", fontWeight:"700"}}>Owner</b></NavLink>
       </NavItem>
       );
     } else {
       return (
         <div className="row">
-        <NavLink style={{marginLeft:"2em",marginTop:"0.5em",color:"black"}} href="/profileowner" className="text-black"><b style={{fontWeight:"500"}}>My Profile</b></NavLink>
+        <NavLink style={{marginLeft:"2em",marginTop:"0.5em",color:"black"}} href="/profileowner" className="text-black"><b style={{fontSize:"22px", fontWeight:"700"}}>My Profile</b></NavLink>
       </div>
       );
     }

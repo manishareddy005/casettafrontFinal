@@ -79,7 +79,7 @@ class LoginPage extends React.Component{
                                       //localStorage.setItem('accessToken',this.state.accessToken)
     
               //this.props.history.push(`/profileowner`);
-                let path=`home`;
+                let path=`prehome`;
                 this.props.history.push({
                   pathname: path,
                   state: {

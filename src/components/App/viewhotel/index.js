@@ -256,20 +256,20 @@ class ViewHotel extends React.Component {
                                             <span className="details" >URL&nbsp;&nbsp;:&nbsp;&nbsp;<a href={this.state.url}>visit the site</a></span><br></br>  <hr></hr> */}
 
                                         <br></br><br></br>
-                                        <u><b><h1 style={{ fontSize: '30px' }}>About</h1></b></u>
-                                        <p>{this.state.description}</p>
+                                        <u><b><h1 style={{ fontSize: '40px', fontWeight:"50" }}>About</h1></b></u>
+                                        <p style={{fontSize:"25px"}}>{this.state.description}</p>
                                         
-                                       <a href={this.state.url}  target="_blank"> <img src={website} width="20vh"></img>&nbsp;&nbsp;<u>website</u></a><br></br><br></br>
-                                        <b>{this.state.rating}</b> &nbsp;&nbsp;&nbsp;<img src={ranking} width="50vh"></img><br></br><br></br>
-                                        <u><b><h1 style={{ fontSize: '30px' }}>Prices</h1></b></u>
-                                             <img src={single} width="50vh"></img>&nbsp;&nbsp;Single Room&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;<b>{this.state.sprice}</b><br></br>
-                                             <img src={double} width="50vh"></img>&nbsp;&nbsp;Double Room&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;<b>{this.state.dprice}</b><br></br>
-                                             <img src={suite} width="50vh"></img>&nbsp;&nbsp;&nbsp;Suite Room&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;<b>{this.state.suprice}</b><br></br><br></br>
+                                       <a href={this.state.url}  target="_blank"> <img src={website} width="30vh"></img>&nbsp;&nbsp;<u style={{fontSize:"30px"}}>website</u></a><br></br><br></br>
+                                        <b style={{ fontSize: '40px', fontWeight:"50" }}>{this.state.rating}</b> &nbsp;&nbsp;&nbsp;<img src={ranking} style={{ width:"80px" }}></img><br></br><br></br>
+                                        <u><b><h1 style={{ fontSize: '40px', fontWeight:"50" }}>Prices</h1></b></u><br></br>
+                                             <img src={single} width="50vh"></img>&nbsp;&nbsp;<p style={{fontSize:"30px"}}>Single Room&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;<b>{this.state.sprice}</b></p><br></br>
+                                             <img src={double} width="50vh"></img>&nbsp;&nbsp;<p style={{fontSize:"30px"}}>Double Room&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;<b>{this.state.dprice}</b></p><br></br>
+                                             <img src={suite} width="50vh"></img>&nbsp;&nbsp;&nbsp;<p style={{fontSize:"30px"}}>Suite Room&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;<b>{this.state.suprice}</b></p><br></br><br></br>
 
                                         
                                       
-                                        <u><b><h1 style={{ fontSize: '30px' }}>Location</h1></b> </u>  
-                                        {this.state.location}<br></br>
+                                        <u><b><h1 style={{ fontSize: '40px', fontWeight:"50" }}>Location</h1></b> </u>  
+                                        <p style={{fontSize:"25px"}}>{this.state.location}</p><br></br>
 
                                             <Map
                                                 ref={this.mapRef}
@@ -301,11 +301,11 @@ class ViewHotel extends React.Component {
                                             </Map>
                                             
                                             <br></br><br></br>
-                                            <u><b><h1 style={{ fontSize: '30px' }}>Address</h1></b></u>
-                                            <p>{this.state.address}</p>
+                                            <u><b><h1 style={{ fontSize: '40px', fontWeight:"50" }}>Address</h1></b></u>
+                                            <p style={{fontSize:"25px"}}>{this.state.address}</p>
                                             
                                             <br></br><br></br>
-                                            <u><b><h1 style={{ fontSize: '30px' }}>Amenities</h1></b> </u>
+                                            <u><b><h1 style={{ fontSize: '40px', fontWeight:"50" }}>Amenities</h1></b> </u>
                                         <div>
                                             <center>
                                                 <div style={{color:"LightSeaGreen"}}>

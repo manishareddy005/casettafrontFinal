@@ -10,6 +10,7 @@ import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, 
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import L from 'leaflet';
 import './map.css';
+import {myicon} from "./icon";
 import { Carousel, Button } from "react-bootstrap";
 import {
    BrowserRouter as Router,
@@ -122,7 +123,18 @@ class HomePage extends React.Component{
 
            }
                               
-                })
+      })
+
+
+                {navigator.geolocation.getCurrentPosition(function(location) {
+                  console.log("my current latitude :",location.coords.latitude)
+                  console.log("my current longitude :",location.coords.longitude);
+                 sessionStorage.setItem("lat",location.coords.latitude)
+                 sessionStorage.setItem("long",location.coords.longitude)
+                 console.log("my current latitude :",sessionStorage.getItem("lat"))
+                  console.log("my current longitude :",sessionStorage.getItem("long"));
+
+                })}
                 
       } 
       onOwnerLogged() {
@@ -131,7 +143,7 @@ class HomePage extends React.Component{
            return (
              <div>
             <NavBar history={this.props.history} oname={sessionStorage.getItem('oname')}/><br></br>
-             <center><h3>Welcome&nbsp;{sessionStorage.getItem('oname')}</h3></center>
+             <center><h3 style={{fontWeight:"600"}}>Welcome&nbsp;{sessionStorage.getItem('oname')}</h3></center>
            </div>
            );
          }
@@ -142,6 +154,8 @@ class HomePage extends React.Component{
             </div>
             );
          }
+         // return(
+         // <NavBar history={this.props.history}/>)
        
       }
  
@@ -163,6 +177,7 @@ class HomePage extends React.Component{
             {this.onOwnerLogged()}
             <div className="row" >
                  <div style={{width:"60%"}}>
+                 {console.log("sdata",this.state)}
                   <HotelList 
                      hotel={this.state.sdata}
                      history={this.props.history}/>
@@ -178,6 +193,10 @@ class HomePage extends React.Component{
                               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                               attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
                            />
+
+                                 <Marker  style={{position:"fixed"}} icon={myicon} position={[parseFloat(sessionStorage.getItem("lat")), parseFloat(sessionStorage.getItem("long"))]}>
+                                 <Popup>Your location.</Popup>
+                                 </Marker>
                      
                                  {this.state.sdata.map((m,index) => (
                                     

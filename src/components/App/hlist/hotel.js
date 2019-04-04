@@ -46,7 +46,7 @@ render(){
         return(
         //  <div className="split left">  
             <div  className="hstyle">
-            <MDBCard style={{ width: "20em" ,height: "20em",background: "white",flex:1 }} >
+            <MDBCard style={{ width: "20em" ,height: "21.5em",background: "white",flex:1 }} >
             <MDBCardBody className="text-black">
                 <MDBCardTitle><span>{this.props.name}</span><br></br></MDBCardTitle>
                 <MDBCardImage className="imgcard" src={imgurl} width="100%" height="50%" waves />
