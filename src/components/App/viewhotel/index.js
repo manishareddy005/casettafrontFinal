@@ -297,7 +297,7 @@ class ViewHotel extends React.Component {
                                                                 {this.state.imgurls.map(function (img, j) { return <img  key={j} src={img} width="80%" /> })}
                                                             </Carousel><br></br>
                                                                 {this.state.location}<br></br>
-                                                                <a target="_blank" href=" https://www.google.com/maps/dir/17.4170112,78.401536/Hyderabad+Marriott+Hotel+%26+Convention+Centre,+Tank+Bund+Road,+Opposite,+Hussain+Sagar,+Lake,+Hyderabad,+Telangana/@17.4148082,78.4331767,14.14z/data=!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3bcb99f77036e181:0x491645e2972a865b!2m2!1d78.4874569!2d17.4242098"><b>Show me the way...</b></a>
+                                                                <a target="_blank" href=" https://www.google.com/maps/dir/17.4170112,78.401536/Hyderabad+Marriott+Hotel+%26+Convention+Centre,+Tank+Bund+Road,+Opposite,+Hussain+Sagar,+Lake,+Hyderabad,+Telangana/@17.4148082,78.4331767,14.14z/data=!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3bcb99f77036e181:0x491645e2972a865b!2m2!1d78.4874569!2d17.4242098"><b>Get Directions...</b></a>
                                                                 
                                                                 </div>
                                                             </Popup>
