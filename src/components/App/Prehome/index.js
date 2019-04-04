@@ -36,8 +36,8 @@ class PreHome extends React.Component{
             {/* {this.onOwnerLogged()} */}
             <div className="mysearch">
            
-            <center><h5 className="text-white"><b><img src = {require("/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/logo2.png")} width="250" height = "150" ></img><br></br>
-                               Hyderabad</b></h5></center><br></br>
+            <center><h3 className="text-white" style={{fontWeight:"400"}}><b><img src = {require("/Users/AkhilaV/Documents/casettafrontFinal/src/components/App/image/logo2.png")} width="250" height = "150" ></img><br></br>
+                               Hyderabad</b></h3></center><br></br>
                <center> <Search history={this.props.history} /></center>
               </div>
               </div>

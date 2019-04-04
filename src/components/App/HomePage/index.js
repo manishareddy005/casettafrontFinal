@@ -119,7 +119,7 @@ class HomePage extends React.Component{
           } 
           if(!this.state.sdata[0])
            {console.log("sdata is:",this.state.sdata[0])
-            alert("No hotels found!!!")
+            // alert("No hotels found!!!")
 
            }
                               

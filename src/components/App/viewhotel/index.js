@@ -14,6 +14,7 @@ import website from "/Users/AkhilaV/Documents/casettafrontFinal/src/components/A
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import L from 'leaflet';
 import './map.css';
+import {myicon} from "../HomePage/icon"
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol, MDBRow } from 'mdbreact';
 import { Carousel } from "react-bootstrap";
 const H = styled.div`
@@ -282,22 +283,27 @@ class ViewHotel extends React.Component {
                                                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                                                     attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
                                                 />
+                                                      <Marker  style={{position:"fixed"}} icon={myicon} position={[parseFloat(sessionStorage.getItem("lat")), parseFloat(sessionStorage.getItem("long"))]}>
+                                                    <Popup>Your location.</Popup>
+                                                    </Marker>
 
-
-
-                                                <Marker position={[this.state.latitude, this.state.longitude]}>
-                                                <Popup minWidth={"200"} closeButton={true} minHeight={10}>
-                                 
-                                                    <div>
-                                                    <b>{this.state.name}</b><br></br>
-                                                    <Carousel>
-                                                     {this.state.imgurls.map(function (img, j) { return <img  key={j} src={img} width="80%" /> })}
-                                                  </Carousel><br></br>
-                                                    {this.state.location}
                                                     
-                                                    </div>
-                                                </Popup>
-                                                </Marker>
+                                                           <Marker position={[this.state.latitude, this.state.longitude]}>
+                                                            <Popup minWidth={"200"} closeButton={true} minHeight={10}>
+                                                           
+                                                                <div>
+                                                                <b>{this.state.name}</b><br></br>
+                                                                <Carousel>
+                                                                {this.state.imgurls.map(function (img, j) { return <img  key={j} src={img} width="80%" /> })}
+                                                            </Carousel><br></br>
+                                                                {this.state.location}<br></br>
+                                                                <a target="_blank" href=" https://www.google.com/maps/dir/17.4170112,78.401536/Hyderabad+Marriott+Hotel+%26+Convention+Centre,+Tank+Bund+Road,+Opposite,+Hussain+Sagar,+Lake,+Hyderabad,+Telangana/@17.4148082,78.4331767,14.14z/data=!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3bcb99f77036e181:0x491645e2972a865b!2m2!1d78.4874569!2d17.4242098"><b>Show me the way...</b></a>
+                                                                
+                                                                </div>
+                                                            </Popup>
+                                                            </Marker>
+                                              
+                                                
                                             </Map>
                                             
                                             <br></br><br></br>
