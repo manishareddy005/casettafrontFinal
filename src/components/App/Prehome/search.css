@@ -43,10 +43,10 @@
     .btn.btn-secondary{
         background: linear-gradient(40deg, #075b56, #839ba6) !important;
     }
-    .mysearch{
+    /* .mysearch{
         position: absolute;
-        margin-top: 35vh;
+        margin-top: 20vh;
         padding-left:20vh; 
         min-width: 100%;
     }
-    
+     */

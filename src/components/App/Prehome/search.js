@@ -29,7 +29,8 @@ class Search extends React.Component{
             state: {
              loc:loc
             }
-           });  
+           }); 
+           window.location.reload() 
            
       }
 

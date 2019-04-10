@@ -35,6 +35,7 @@ class HomePage extends React.Component{
       super(props);
       this.onOwnerLogged=this.onOwnerLogged.bind(this);
       this.onViewClick=this.onViewClick.bind(this);
+      this.getNearbyHotels=this.getNearbyHotels.bind(this);
       this.state={
          sdata:[],
          rt:{
@@ -42,6 +43,10 @@ class HomePage extends React.Component{
          },
          markers: [],
          imgurls:[],
+         nearby:{
+            lat:'',
+            lng:''
+         }
         
       }
     }
@@ -137,6 +142,7 @@ class HomePage extends React.Component{
                 })}
                 
       } 
+
       onOwnerLogged() {
          if(sessionStorage.getItem('oname') != null) 
          {
@@ -169,6 +175,55 @@ class HomePage extends React.Component{
              }
             });
      }
+     getNearbyHotels(){
+     let url = "http://localhost:9000/hotelsL"; 
+      let headers = new Headers();
+      
+      headers.append('Content-Type', 'application/json');
+      headers.append('Accept', 'application/json');
+  
+      headers.append('Access-Control-Allow-Origin', url);
+      headers.append('Access-Control-Allow-Credentials', 'true');
+  
+      headers.append('GET', 'POST');
+      let store=this.state;
+      store.nearby.lat=sessionStorage.getItem("lat");
+      store.nearby.lng=sessionStorage.getItem("long")
+      this.setState({
+         store
+       })
+  
+      fetch(url, {
+          headers: headers,
+          method: 'POST',
+          body: JSON.stringify(this.state.nearby)
+      })
+      .then(response => response.json())
+      .then(contents => {console.log("in fetch: "+ JSON.stringify(contents));
+        
+
+         //  {alert("No hotels found!!")}
+          if (contents.imageUrls != null) {
+                              this.setState ({
+                              sdata : contents,
+                              imgurls: contents.imageUrls})  
+          }
+          else{
+            this.setState({
+               sdata : contents,
+               imgurls: [{ himage }]
+           })
+          } 
+          if(!this.state.sdata[0])
+           {console.log("sdata is:",this.state.sdata[0])
+            // alert("No hotels found!!!")
+
+           }
+                              
+      })
+
+     }
+     
    render(){
       
       return(
@@ -178,6 +233,7 @@ class HomePage extends React.Component{
             <div className="row" >
                  <div style={{width:"60%"}}>
                  {console.log("sdata",this.state)}
+                 <div style={{marginLeft:"6%"}}><MDBBtn onClick={this.getNearbyHotels}>show nearby</MDBBtn></div>
                   <HotelList 
                      hotel={this.state.sdata}
                      history={this.props.history}/>
@@ -195,7 +251,7 @@ class HomePage extends React.Component{
                            />
 
                                  <Marker  style={{position:"fixed"}} icon={myicon} position={[parseFloat(sessionStorage.getItem("lat")), parseFloat(sessionStorage.getItem("long"))]}>
-                                 <Popup>Your location.</Popup>
+                                 <Popup>Your are here...</Popup>
                                  </Marker>
                      
                                  {this.state.sdata.map((m,index) => (
@@ -209,7 +265,8 @@ class HomePage extends React.Component{
                                     <Carousel>
                                         {m.imageUrls.map(function (img, j) { return <img key={j} src={img} width="80%"  /> })}
                                     </Carousel><br></br>
-                                    {m.location}        
+                                    {m.location}  <br></br>
+                                    Rs.{m.sprice}&nbsp;(for single room)     
                                     </div>
                                  </Popup>
                                  </Marker>

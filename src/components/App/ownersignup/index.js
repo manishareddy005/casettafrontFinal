@@ -143,7 +143,7 @@ class SignUpPage extends React.Component {
     }
     if (!fields["confirmpassword"]) {
       formIsValid = false;
-      errors["confirmpassword"] = "*Please enter your confirm password.";
+      errors["confirmpassword"] = "*Please confirm your password.";
     }
     if (typeof fields["confirmpassword"] !== "undefined") {
       if (fields["password"]!=fields["confirmpassword"]) {

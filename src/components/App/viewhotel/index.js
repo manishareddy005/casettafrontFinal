@@ -55,7 +55,10 @@ class ViewHotel extends React.Component {
             output1: [],
             imgurls: [],
             markers: [],
+            distance:'',
+            time:''
         }
+        this.getDistance =this.getDistance.bind(this)
     }
     componentDidMount(props) {
         let id = this.props.location.state.id;
@@ -121,6 +124,27 @@ class ViewHotel extends React.Component {
             }]
         })
     }
+
+    getDistance() {
+        // return distance in meters
+        var lon1 = (parseFloat(sessionStorage.getItem("long")))*Math.PI/180,
+            lat1 = (parseFloat(sessionStorage.getItem("lat")))*Math.PI/180,
+            lon2 = (this.state.longitude)*Math.PI/180,
+            lat2 = (this.state.latitude)*Math.PI/180;
+    
+        var deltaLat = lat2 - lat1;
+        var deltaLon = lon2 - lon1;
+    
+        var a = Math.pow(Math.sin(deltaLat/2), 2) + Math.cos(lat1) * Math.cos(lat2) * Math.pow(Math.sin(deltaLon/2), 2);
+        var c = 2 * Math.asin(Math.sqrt(a));
+        var EARTH_RADIUS = 6371;
+        var d= (c * EARTH_RADIUS).toFixed(2);
+        var time = ((d*1000)/234).toFixed(2);
+       // var d = geolib.getDistance({latitude: lat1, longitude: lon1}, {latitude: lat2, longitude: lon2})
+        this.setState ({ distance : d,
+        time: time})
+    }
+  
 
 
     render() {
@@ -230,6 +254,8 @@ class ViewHotel extends React.Component {
             this.state.output1.push(<i class="fa fa-snowflake fa-2x" aria-hidden="true"></i>)
             this.state.output.push("Air Conditioning");
         }
+ 
+        let url1="https://www.google.com/maps/dir/?api=1&destination="+ this.state.name;
 
         return (
             <div className="homeb">
@@ -284,11 +310,11 @@ class ViewHotel extends React.Component {
                                                     attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
                                                 />
                                                       <Marker  style={{position:"fixed"}} icon={myicon} position={[parseFloat(sessionStorage.getItem("lat")), parseFloat(sessionStorage.getItem("long"))]}>
-                                                    <Popup>Your location.</Popup>
+                                                    <Popup>Your are here..</Popup>
                                                     </Marker>
 
                                                     
-                                                           <Marker position={[this.state.latitude, this.state.longitude]}>
+                                                           <Marker position={[this.state.latitude, this.state.longitude]} onclick={this.getDistance}>
                                                             <Popup minWidth={"200"} closeButton={true} minHeight={10}>
                                                            
                                                                 <div>
@@ -297,11 +323,18 @@ class ViewHotel extends React.Component {
                                                                 {this.state.imgurls.map(function (img, j) { return <img  key={j} src={img} width="80%" /> })}
                                                             </Carousel><br></br>
                                                                 {this.state.location}<br></br>
-                                                                <a target="_blank" href=" https://www.google.com/maps/dir/17.4170112,78.401536/Hyderabad+Marriott+Hotel+%26+Convention+Centre,+Tank+Bund+Road,+Opposite,+Hussain+Sagar,+Lake,+Hyderabad,+Telangana/@17.4148082,78.4331767,14.14z/data=!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3bcb99f77036e181:0x491645e2972a865b!2m2!1d78.4874569!2d17.4242098"><b>Get Directions...</b></a>
+                                                               
+                                                                <b>{this.state.time}</b>&nbsp;mins
+                                                               <br></br>{this.state.distance}&nbsp;Km<br></br>
+                                                                {/* <a target="_blank" href="https://www.google.com/maps/dir///@17.405574,78.4012859,15z/data=!4m4!4m3!1m1!4e2!1m0"><b>Get Directions...</b></a>
+                                                             */}
                                                                 
+                                                                <a target="_blank" href={url1}><b>Get Directions...</b></a>
+
                                                                 </div>
                                                             </Popup>
                                                             </Marker>
+                                                            
                                               
                                                 
                                             </Map>
